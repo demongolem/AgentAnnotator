@@ -1,5 +1,5 @@
 # AgentAnnotator
-A very robust semi-automated annotation tool for those having to annotate NLP aspects of documents
+A very robust semi-automated annotation tool for those having to annotate NLP aspects of documents.  It is developed in C#.
 
 This project has a dependency on another sentiment rest api that I have developed (to be named and located on git later with link) to perform sentiment analysis on documents as required.
 
