@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
@@ -23,3 +24,30 @@ Global
 		SolutionGuid = {8772EFC2-7DAD-4B3A-BE56-058DEC782778}
 	EndGlobalSection
 EndGlobal
+=======
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnnotationTool", "AnnotationTool\AnnotationTool.csproj", "{3727BCFC-5CB4-460B-B88E-4C24A8AEA78E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3727BCFC-5CB4-460B-B88E-4C24A8AEA78E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3727BCFC-5CB4-460B-B88E-4C24A8AEA78E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3727BCFC-5CB4-460B-B88E-4C24A8AEA78E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3727BCFC-5CB4-460B-B88E-4C24A8AEA78E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8772EFC2-7DAD-4B3A-BE56-058DEC782778}
+	EndGlobalSection
+EndGlobal
+>>>>>>> 968189073efe376f22c268784f0b4387d63e4804
