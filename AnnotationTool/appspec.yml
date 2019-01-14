@@ -1,0 +1,12 @@
+version: 0.0
+os: windows
+files:
+ - source: \
+   destination: c:\inetpub\wwwroot
+hooks:
+ BeforeInstall:
+ - location: aws-before-install.bat
+   timeout: 300
+ AfterInstall:
+ - location: aws-after-install.bat
+   timeout: 30

@@ -1,0 +1,18 @@
+﻿{
+	"roles": [{
+		"name": "edit",
+		"access": "3"
+	}, {
+		"name": "view",
+		"access": "1"
+	}, {
+		"name": "admin",
+		"access": "4"
+	}, {
+		"name": "su",
+		"access": "7"
+	}, {
+		"name": "none",
+		"access": "0"
+	}]
+}

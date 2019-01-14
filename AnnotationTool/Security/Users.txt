@@ -1,0 +1,27 @@
+﻿{
+	"users": [{
+		"name": "george",
+		"password": "george",
+		"role": "edit"
+	}, {
+		"name": "greg",
+		"password": "greg",
+		"role": "edit"
+	}, {
+		"name": "guest",
+		"password": "guest",
+		"role": "view"
+	}, {
+		"name": "admin",
+		"password": "admin",
+		"role": "none"
+	}, {
+		"name": "su",
+		"password": "su",
+		"role": "su"
+	}, {
+		"name": "dan",
+		"password": "dan",
+		"role": "none"
+	}]
+}

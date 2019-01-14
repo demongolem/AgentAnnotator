@@ -1,0 +1,8 @@
+ar_parsed.txt
+de_parsed.txt
+el_parsed.txt
+en_parsed.txt
+it_parsed.txt
+ru_parsed.txt
+uk_parsed.txt
+zh_parsed.txt

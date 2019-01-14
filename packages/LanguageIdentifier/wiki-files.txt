@@ -1,0 +1,8 @@
+arwiki-latest-abstract.xml
+dewiki-latest-abstract.xml
+elwiki-latest-abstract.xml
+enwiki-latest-abstract.xml
+itwiki-latest-abstract.xml
+ruwiki-latest-abstract.xml
+ukwiki-latest-abstract.xml
+zhwiki-latest-abstract-zh-cn1.xml

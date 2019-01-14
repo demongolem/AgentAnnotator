@@ -1,0 +1,24 @@
+Save
+It’s not just small startups trying to cash in on the rush to launch hordes of tiny satellites into space.
+Tucson-based Raytheon Missile Systems, the region’s biggest tech company, is vying for a role in the small-satellite market for defense, and soon one of its mini-sats will blast into space.
+Raytheon recently announced that it delivered the first Space Enabled Effects for Military Engagements, or SeeMe, satellite to the Defense Advanced Research Projects Agency, or DARPA.
+DARPA plans to load the Raytheon-built SeeMe satellite onto a payload that will be launched into low-earth orbit on a SpaceX rocket later this month.
+The SeeMe program is designed to show that small satellites — about the size of a 5-gallon bucket — can be built affordably to give ground troops timely tactical imagery directly from a small satellite.
+In the future, a constellation of small satellites could deliver high-resolution images of precise locations to a soldier’s handheld device, Raytheon explains.
+Ground troops can’t always get immediate access to larger military and commercial satellites, said Thomas Bussing, Raytheon vice president of advanced missile systems.
+“These smaller, SeeMe satellites will be dedicated to soldiers, providing them with real-time images from space when they’re needed most,” Bussing said in announcing the first delivery in early October.
+Raytheon says that by using its automated missile production lines, it can build large numbers of highly reliable, small satellites quickly and affordably.
+Earlier this year, Raytheon said it had built two tiny satellites for the U.S. Department of Homeland Security to help search-and-rescue teams locate emergency beacons in remote areas.
+The Raytheon satellite will be part of a DARPA payload expected to launch from Vandenberg Air Force Base as soon as later this month aboard a SpaceX Falcon 9 rocket, on a flight coordinated by Seattle-based Spaceflight Industries.
+The mission — named SSO-A: SmallSat Express — will launch “no earlier than Nov. 19” and carry 64 spacecraft from 34 different private and government organizations from 17 countries, a spokeswoman for Spaceflight said. World View mishap
+A high-altitude balloon launched by Tucson-based World View Enterprises recently made an emergency controlled landing in northern Sonora, Mexico, the company confirmed.
+World View has developed a system using massive plastic balloons to carry research and other payloads to the stratosphere, remotely controlling the craft to approximate geostationary orbit. The company is planning to eventually offer people flights to the stratosphere.
+The balloons are launched from World View’s headquarters at Spaceport Tucson south of Tucson International Airport and are generally steered toward recovery in remote areas.
+On Oct. 27, a balloon vehicle the company launched from Spaceport Tucson “experienced a minor sub-system anomaly” and a controlled descent was conducted “followed by a safe landing in a remote area” near Trincheras, Sonora, a World View spokeswoman said.
+The flight, landing and recovery were fully coordinated with all necessary federal, state and local authorities and parties, the company said.
+Like other aircraft, World View’s balloons are fitted with radio transponders that help other aircraft identify and locate them. Award finalists
+Two Tucson-based tech startups are up for awards Thursday evening at the 2018 Governor’s Celebration of Innovation , an annual awards gala hosted by the Arizona Technology Council in partnership with the Arizona Commerce Authority.
+BlackBar Engineering, a unmanned aircraft technology firm formerly known as BrockTek, and Regulonix, which is developing new, non-opioid drugs for pain, are among three finalists for the Innovator of the Year-Startup Company award.
+Additionally, IBM Corp.’s Tucson operation is a finalist for the large-company Innovator of the Year award, while finalists for the academic Innovator of the Year award include University of Arizona professor Laurence Hurley, a professor of pharmaceutical sciences and drug researcher.
+Hurley serves as associate director of the UA’s Bio5 Institute and co-director of the molecular therapeutics program at the Arizona Cancer Center.
+The 15th annual awards gala will be held at the Phoenix Convention Center and is expected to attract more than 800 attendees.

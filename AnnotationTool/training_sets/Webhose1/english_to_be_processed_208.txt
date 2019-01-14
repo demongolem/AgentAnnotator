@@ -1,0 +1,71 @@
+ISACA Partners with National Threatcasting Initiative and Releases its First Threatcasting Labs to Tackle IoT, AI and Home Automation Security Threats Nov 7, 2018 Collaboration with Arizona State University’s Threatcasting Lab and Partners Such as Army Cyber Institute Help to Model Threats and Design Solutions
+SCHAUMBURG, Ill.--(BUSINESS WIRE)--It’s impossible to predict the future with absolute certainty. However,
+ISACA, along with Arizona State University and the Army Cyber Institute,
+is aiming to get as close as possible to doing just that by using
+threatcasting to envision future risks—as well as by releasing its own
+threatcasting labs to help professionals do the same.
+As a founding member of Arizona State University’s Threatcasting Lab
+committee, global information and technology association ISACA is among
+the government, corporate, non-profit, military and academic stakeholder
+groups that model potential future threats that could arise 10 years
+into the future—from cyberwarfare impacting national security to major
+hacks that hit consumers—and then brainstorm potential solutions in an
+innovative environment.
+“ISACA is proud to collaborate with the ASU Threatcasting Lab and other
+involved key partners like the Army Cyber Institute to model and prepare
+for issues that could have a significant security impact years from
+now,” said Frank Downs, Director of Cybersecurity Practice at ISACA. “As
+part of ISACA’s purpose to help individuals and enterprises achieve the
+positive potential of technology, we are committed to passing along the
+lessons learned about the threatcasting process to the professionals we
+serve.”
+Added Lt. Col. Bob Ross, research scientist with Army Cyber Institute,
+“Our collaborations with both ASU Threatcasting Lab and ISACA lead to
+unique perspectives on future cyber threats. These relationships open
+new doors that enable us to fulfill our goals and expand the body of
+knowledge. Leveraging our partnerships with ASU and ISACA prepares and
+strengthens our nation’s abilities to defend our interests in the cyber
+domain.”
+As part of the ASU Threatcasting Lab’s charter, members are encouraged
+to educate others on this model of forecasting and preparing for
+threats. This inspired ISACA to develop its own threatcasting labs, Home
+Automation Device Patterns and IoT
+Device Indicators, which are now available to professionals
+through ISACA’s Cybersecurity Nexus. The two labs explore questions
+around the use of IoT, home automation, and AI algorithms in everyday
+life—including how data used by smart light bulbs, thermostats and door
+locks can be sent across the internet, and how lifestyle patterns may
+inadvertently be leaked by these algorithms and then potentially be
+exploited. These threatcasting labs can be experienced virtually at
+one’s convenience, and each provide two continuing professional
+education (CPE) credits.
+“When I created the threatcasting process, the intent was not only to
+envision possible threats, but also to empower people and organizations
+to take action. The Threatcasting Lab at Arizona State University’s
+charter is to empower people by bringing together organizations like
+ISACA and the ACI to collaborate,” said Brian David Johnson, futurist
+and professor of practice at ASU’s School for the Future of Innovation
+in Society. “I see ISACA’s development and release of its Threatcasting
+Labs as a fulfillment of threatcasting’s purpose, using the output of
+the lab to create tools that help make organizations and people safer in
+the future.”
+To learn more about the ASU Threatcasting Lab, its mission and
+publications including science fiction prototypes, visit https://threatcasting.com/ .
+More information about the Army Cyber Institute’s threatcasting
+initiatives related to topics of national security, including weaponized
+artificial intelligence, can be found at https://cyber.army.mil/Work-Areas/Threatcasting/ .
+ISACA’s threatcasting labs are available at https://nexus.isaca.org/products/98
+Additional detail about ISACA’s cybersecurity training options, as well
+as resources, events and exams, can be found at https://cybersecurity.isaca.org/ .
+About ISACA
+Nearing its 50th year, ISACA ® ( isaca.org )
+is a global association helping individuals and enterprises achieve the
+positive potential of technology. Today’s world is powered by
+technology, and ISACA equips professionals with the knowledge,
+credentials, education and community to advance their careers and
+transform their organizations. ISACA leverages the expertise of its
+450,000 engaged professionals in information and cybersecurity,
+governance, assurance, risk and innovation, as well as its enterprise
+Institute, to help advance innovation through technology. ISACA has
+a presence in more than 188 countries, including 217 chapters worldwide
+and offices in both the United States and China.
