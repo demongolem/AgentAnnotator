@@ -225,6 +225,52 @@ namespace AnnotationTool.API
             return JsonConvert.SerializeObject(values);
         }
 
+        [HttpPost]
+        [Route("suggest_entity_sentiment")]
+        public async System.Threading.Tasks.Task<string> SuggestEntitySentimentAsync(Models.Sentiment doc)
+        {
+            Dictionary<string, double> values = new Dictionary<string, double>();
+            // we need to call the sentiment web service here.  the location should be configured externally
+            var url = ConfigurationManager.AppSettings["SentimentServiceUrl"];
+            using (var client = new HttpClient())
+            {
+                //set up client
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.Timeout = TimeSpan.FromMinutes(10);
+
+                var nvc = new List<KeyValuePair<string, string>>();
+                var texts = doc.RawText;
+                var annotators = doc.Annotators;
+                var mode = doc.Mode;
+                nvc.Add(new KeyValuePair<string, string>("texts", texts));
+                nvc.Add(new KeyValuePair<string, string>("preset", "all"));
+                nvc.Add(new KeyValuePair<string, string>("mode", mode));
+
+                // we need to eventually pass in which annotator we are using
+                string fullUrl = url + "/" + annotators;
+
+                var req = new HttpRequestMessage(HttpMethod.Post, fullUrl)
+                {
+                    Content = new FormUrlEncodedContent(nvc)
+                };
+
+                var response = await client.SendAsync(req);
+                if (!response.IsSuccessStatusCode)
+                {
+                    // Nothing for this case
+                }
+                else if ("charlstm" == annotators)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    values = JsonConvert.DeserializeObject<Dictionary<string, double>>(result);
+                }
+            }
+            // now once we have values, we will return them to the annotation view.
+            return JsonConvert.SerializeObject(values);
+        }
+
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("generate_entities")]
         public string SuggestEntities(Models.Document document)

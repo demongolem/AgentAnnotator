@@ -304,6 +304,48 @@ function HomeViewModel(app, dataModel) {
         });
     };
 
+    self.auto_entity_sentiment = function (test) {
+        $('#hidden_entity_sentiment').css('display', 'block');
+    };
+
+    self.apply_auto_entity_sentiment = function (test) {
+        var quillText = quill.getText();
+        var annotators = $("input:radio[name='entity_annotator_group']:checked").val();
+        var mode = 'entity';
+        var url = "/advanced/suggest_entity_sentiment";
+        var allData = { RawText: quillText, Annotators: annotators, Mode: mode };
+        $.ajax({
+            type: "POST",
+            data: allData,
+            url: apiBaseUrl + url,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "json",
+            success: function (rsp) {
+                $('#entity_sentiment_scores tbody').empty();
+                var values = JSON.parse(rsp);
+                for (var key in values) {
+                    var first_value = values[key];
+                    var rating = '';
+                    if (first_value > 0.75) {
+                        rating = 'Very Positive';
+                    } else if (first_value < -0.75) {
+                        rating = 'Very Negative';
+                    } else if (first_value > 0.25) {
+                        rating = 'Positive';
+                    } else if (first_value < -0.25) {
+                        rating = 'Negative';
+                    } else {
+                        rating = 'Neutral';
+                    }
+                    $('#entity_sentiment_scores > tbody:last-child').append('<tr><td>' + key + '</td><td>' + rating + '</td></tr>');
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    };
+
     self.auto_sent_sentiment = function (test) {
         $('#hidden_sent_sentiment').css('display', 'block');
     };
