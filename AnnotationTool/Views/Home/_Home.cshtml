@@ -23,28 +23,28 @@
     <img style="height:25px;width:25px" src="/Content/left_arrow.png" data-bind="click: $data.openLeftFile" />
     <img style="height:25px;width:25px" src="/Content/right_arrow.png" data-bind="click: $data.openRightFile" />
 </div>
-<div>
+<div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">Organizations:</h4>
     <span data-bind="foreach: Organizations">
-        <span class="label label-danger" style="font-size:16px; margin-right:5px;">
+        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeOrganization"></span>
         </span>
     </span>
 </div>
-<div>
+<div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">Locations:</h4>
     <span data-bind="foreach: Locations">
-        <span class="label label-success" style="font-size:16px; margin-right:5px;">
+        <span class="label label-success" style="font-size:12px; margin-right:5px; margin-bottom:5px;">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeLocation"></span>
         </span>
     </span>
 </div>
-<div>
+<div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">People:</h4>
     <span data-bind="foreach: People">
-        <span class="label label-primary" style="font-size:16px; margin-right:5px;">
+        <span class="label label-primary" style="font-size:12px; margin-right:5px; margin-bottom:5px;">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removePeople"></span>
         </span>
