@@ -4,3 +4,6 @@ A very robust semi-automated annotation tool for those having to annotate NLP as
 This project has a dependency on another sentiment rest api that I have developed MultilevelSentiment (https://github.com/demongolem/MultilevelSentiment/) to perform sentiment analysis on documents, sentences or entities as required.
 
 If we are using the sentiment piece as well, we have to make sure that version of CoreNLP used for each one is the same.  At the present moment, AgentAnnotator uses 3.9.1.
+
+#Version History
+0.1 - Intitial Release - 01/17/2019
