@@ -3,6 +3,14 @@
 var oldSenSentiment = [];
 var splitSentences = [];
 
+function turnOnWait() {
+    $("body").css("cursor", "progress");
+}
+
+function turnOffWait() {
+    $("body").css("cursor", "default");
+}
+
 function HomeViewModel(app, dataModel) {
     var self = this;
 
@@ -275,7 +283,8 @@ function HomeViewModel(app, dataModel) {
         var annotators = $("input:radio[name='annotator_group']:checked").val();
         var mode = 'document';
         var url = "/advanced/suggest_sentiment";
-        var allData = { RawText: quillText, Annotators: annotators, Mode: mode};
+        var allData = { RawText: quillText, Annotators: annotators, Mode: mode };
+        turnOnWait();
         $.ajax({
             type: "POST",
             data: allData,
@@ -297,9 +306,11 @@ function HomeViewModel(app, dataModel) {
                     self.selectedSentimentOption('Neutral');
                 }
                 $('#hidden_doc_sentiment').css('display', 'none');
+                turnOffWait();
             },
             error: function () {
                 alert("error");
+                turnOffWait();
             }
         });
     };
@@ -314,6 +325,7 @@ function HomeViewModel(app, dataModel) {
         var mode = 'entity';
         var url = "/advanced/suggest_entity_sentiment";
         var allData = { RawText: quillText, Annotators: annotators, Mode: mode };
+        turnOnWait();
         $.ajax({
             type: "POST",
             data: allData,
@@ -339,9 +351,11 @@ function HomeViewModel(app, dataModel) {
                     }
                     $('#entity_sentiment_scores > tbody:last-child').append('<tr><td>' + key + '</td><td>' + rating + '</td></tr>');
                 }
+                turnOffWait();
             },
             error: function () {
                 alert("error");
+                turnOffWait();
             }
         });
     };
@@ -356,6 +370,7 @@ function HomeViewModel(app, dataModel) {
         var mode = "sentence";
         var url = "/advanced/suggest_sent_sentiment";
         var allData = { RawText: quillText, Annotators: sentence_based_annotators, Mode: mode };
+        turnOnWait();
         $.ajax({
             type: "POST",
             data: allData,
@@ -380,9 +395,11 @@ function HomeViewModel(app, dataModel) {
                 }
 
                 $('#hidden_sent_sentiment').css('display', 'none');
+                turnOffWait();
             },
             error: function () {
                 alert("error");
+                turnOffWait();
             }
         });
     }
