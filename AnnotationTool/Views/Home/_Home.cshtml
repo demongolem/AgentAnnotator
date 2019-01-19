@@ -26,7 +26,7 @@
 <div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">Organizations:</h4>
     <span data-bind="foreach: Organizations">
-        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="attr: { id: 'org_' + Id, begin: begin, end: end},hasFocus: $parent.findOrganization">
+        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="event: { mouseenter: $parent.findOrganization, mouseleave: $parent.leaveOrganization } ">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeOrganization"></span>
         </span>
@@ -35,7 +35,7 @@
 <div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">Locations:</h4>
     <span data-bind="foreach: Locations">
-        <span class="label label-success" style="font-size:12px; margin-right:5px; margin-bottom:5px;">
+        <span class="label label-success" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="event: { mouseenter: $parent.findLocation, mouseleave: $parent.leaveLocation } ">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeLocation"></span>
         </span>
@@ -44,7 +44,7 @@
 <div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">People:</h4>
     <span data-bind="foreach: People">
-        <span class="label label-primary" style="font-size:12px; margin-right:5px; margin-bottom:5px;">
+        <span class="label label-primary" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="event: { mouseenter: $parent.findPerson, mouseleave: $parent.leavePerson } ">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removePeople"></span>
         </span>

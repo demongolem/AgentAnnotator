@@ -78,12 +78,40 @@ function HomeViewModel(app, dataModel) {
 
     self.folderFile = ko.observableArray();
 
-
     self.findOrganization = function (org) {
-        alert('In here');
         var begin = org.begin;
         var end = org.end;
         quill.formatText(begin, end - begin, "background-color", "yellow");
+    };
+
+    self.leaveOrganization = function (org) {
+        var begin = org.begin;
+        var end = org.end;
+        quill.formatText(begin, end - begin, "background-color", "white");
+    };
+
+    self.findLocation = function (loc) {
+        var begin = loc.begin;
+        var end = loc.end;
+        quill.formatText(begin, end - begin, "background-color", "yellow");
+    };
+
+    self.leaveLocation = function (loc) {
+        var begin = loc.begin;
+        var end = loc.end;
+        quill.formatText(begin, end - begin, "background-color", "white");
+    };
+
+    self.findPerson = function (per) {
+        var begin = per.begin;
+        var end = per.end;
+        quill.formatText(begin, end - begin, "background-color", "yellow");
+    };
+
+    self.leavePerson = function (per) {
+        var begin = per.begin;
+        var end = per.end;
+        quill.formatText(begin, end - begin, "background-color", "white");
     };
 
     self.removeOrganization = function (org) {
