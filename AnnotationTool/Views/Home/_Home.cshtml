@@ -26,7 +26,7 @@
 <div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">Organizations:</h4>
     <span data-bind="foreach: Organizations">
-        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;">
+        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="attr: { id: 'org_' + Id, begin: begin, end: end},hasFocus: $parent.findOrganization">
             <span data-bind="text: Text"></span>
             <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeOrganization"></span>
         </span>

@@ -79,6 +79,13 @@ function HomeViewModel(app, dataModel) {
     self.folderFile = ko.observableArray();
 
 
+    self.findOrganization = function (org) {
+        alert('In here');
+        var begin = org.begin;
+        var end = org.end;
+        quill.formatText(begin, end - begin, "background-color", "yellow");
+    };
+
     self.removeOrganization = function (org) {
         var begin = org.begin;
         var end = org.end;
@@ -118,6 +125,90 @@ function HomeViewModel(app, dataModel) {
         }
     };
 
+    self.insertOrganization = function(new_org) {
+        var new_begin = parseInt(new_org['begin']);
+        var new_end = parseInt(new_org['end']);
+        var organizations = self.Organizations();
+        var insert_point = organizations.length;
+        if (insert_point === 0) {
+            self.Organizations.push(new_org);
+            return;
+        }
+        for (var x = 0; x < organizations.length; x++) {
+            var this_org = organizations[x];
+            var this_begin = this_org.begin;
+            var this_end = this_org.end;
+            if (this_begin > new_begin) {
+                insert_point = x;
+                break;
+            }
+        }
+        self.Organizations.splice(insert_point, 0, new_org);
+    };
+
+    self.insertLocation = function (new_loc) {
+        var new_begin = parseInt(new_loc['begin']);
+        var new_end = parseInt(new_loc['end']);
+        var locations = self.Locations();
+        var insert_point = locations.length;
+        if (insert_point === 0) {
+            self.Locations.push(new_loc);
+            return;
+        }
+        for (var x = 0; x < locations.length; x++) {
+            var this_loc = locations[x];
+            var this_begin = this_loc.begin;
+            var this_end = this_loc.end;
+            if (this_begin > new_begin) {
+                insert_point = x;
+                break;
+            }
+        }
+        self.Locations.splice(insert_point, 0, new_loc);
+    };
+
+    self.insertPerson = function (new_per) {
+        var new_begin = parseInt(new_per['begin']);
+        var new_end = parseInt(new_per['end']);
+        var persons = self.People();
+        var insert_point = persons.length;
+        if (insert_point === 0) {
+            self.People.push(new_per);
+            return;
+        }
+        for (var x = 0; x < persons.length; x++) {
+            var this_per = persons[x];
+            var this_begin = this_per.begin;
+            var this_end = this_per.end;
+            if (this_begin > new_begin) {
+                insert_point = x;
+                break;
+            }
+        }
+        self.People.splice(insert_point, 0, new_per);
+    };
+
+    self.insertEntity = function (new_entity) {
+        var new_begin = parseInt(new_entity['begin']);
+        var new_end = parseInt(new_entity['end']);
+        var entities = self.AllEntities();
+        var insert_point = entities.length;
+        if (insert_point === 0) {
+            self.AllEntities.push(new_entity);
+            return;
+        }
+        for (var x = 0; x < entities.length; x++) {
+            var this_ent = entities[x];
+            var this_begin = this_ent.begin;
+            var this_end = this_ent.end;
+            if (this_begin > new_begin) {
+                insert_point = x;
+                break;
+            }
+        }
+        self.AllEntities.splice(insert_point, 0, new_entity);
+    };
+
     self.addFilePath = function (data) {
         var selected_item = data.filePath;
         var ext = selected_item.split(".").pop();
@@ -140,23 +231,30 @@ function HomeViewModel(app, dataModel) {
 
                     for (var x = 0; x < annotations.length; x++) {
                         var text = quill.getText(annotations[x].begin, annotations[x].end - annotations[x].begin);
+                        var new_entity = {};
                         if (annotations[x].type === "Organization") {
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, "color", "red");
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            self.Organizations.push({ Id: orgId++, Text: text, begin: annotations[x].begin, end: annotations[x].end });
-                            self.AllEntities.push({ begin: annotations[x].begin, end: annotations[x].end, type: "Organization" });
+                            var new_organization = { Id: orgId++, Text: text, begin: annotations[x].begin, end: annotations[x].end};
+                            self.insertOrganization(new_organization);
+                            new_entity = { begin: annotations[x].begin, end: annotations[x].end, type: "Organization" };
+                            self.insertEntity(new_entity);
                         }
                         else if (annotations[x].type === "Location") {
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'color', "blue");
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            self.Locations.push({ Id: locId++, Text: text, begin: annotations[x].begin, end: annotations[x].end });
-                            self.AllEntities.push({ begin: annotations[x].begin, end: annotations[x].end, type: "Location" });
+                            var new_location = { Id: locId++, Text: text, begin: annotations[x].begin, end: annotations[x].end };
+                            self.insertLocation(new_location);
+                            new_entity = { begin: annotations[x].begin, end: annotations[x].end, type: "Location" };
+                            self.insertEntity(new_entity);
                         }
                         else if (annotations[x].type === "People") {
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'color', "green");
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            self.People.push({ Id: perId++, Text: text, begin: annotations[x].begin, end: annotations[x].end });
-                            self.AllEntities.push({ begin: annotations[x].begin, end: annotations[x].end, type: "People" });
+                            var new_person = { Id: perId++, Text: text, begin: annotations[x].begin, end: annotations[x].end };
+                            self.insertPerson(new_person);
+                            new_entity = { begin: annotations[x].begin, end: annotations[x].end, type: "People" };
+                            self.insertEntity(new_entity);
                         }
 
                     }
@@ -247,23 +345,30 @@ function HomeViewModel(app, dataModel) {
                     // None of our types are international, so toUpperCase is sufficient for this situation                    
                     type = entry['type'].toUpperCase();
                     var text = quill.getText(begin, end - begin);
+                    var new_entity;
                     if (type === "ORGANIZATION") {
                         quill.formatText(begin, end - begin, "color", "red");
                         quill.formatText(begin, end - begin, 'bold', true);
-                        self.Organizations.push({ Id: self.orgNo++, Text: text, begin: begin, end: end });
-                        self.AllEntities.push({ begin: begin, end: end, type: "Organization" });
+                        var new_organization = { Id: self.orgNo++, Text: text, begin: begin, end: end };
+                        self.insertOrganization(new_organization);
+                        new_entity = { begin: begin, end: end, type: "Organization" };
+                        self.insertEntity(new_entity);
                     }
                     else if (type === "LOCATION") {
                         quill.formatText(begin, end - begin, 'color', "blue");
                         quill.formatText(begin, end - begin, 'bold', true);
-                        self.Locations.push({ Id: self.locNo++, Text: text, begin: begin, end: end });
-                        self.AllEntities.push({ begin: begin, end: end, type: "Location" });
+                        var new_location = { Id: self.locNo++, Text: text, begin: begin, end: end };
+                        self.insertLocation(new_location);
+                        new_entity = { begin: begin, end: end, type: "Location" };
+                        self.insertEntity(new_entity);
                     }
                     else if (type === "PERSON") {
                         quill.formatText(begin, end - begin, 'color', "green");
                         quill.formatText(begin, end - begin, 'bold', true);
-                        self.People.push({ Id: self.perNo++, Text: text, begin: begin, end: end});
-                        self.AllEntities.push({ begin: begin, end: end, type: "People" });
+                        var new_person = { Id: self.perNo++, Text: text, begin: begin, end: end };
+                        self.insertPerson(new_person);
+                        new_entity = { begin: begin, end: end, type: "People" };
+                        self.insertEntity(new_entity);
                     }
 
                 }
@@ -544,23 +649,30 @@ function HomeViewModel(app, dataModel) {
                 return;
             } else {
                 var text = quill.getText(range.index, range.length);
+                var new_entity = {};
                 if (self.selectedOption() === "Organization") {
                     quill.format("color", "red");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    self.Organizations.push({ Id: self.orgNo++, Text: text, begin: range.index, end: range.index + range.length });
-                    self.AllEntities.push({ begin: range.index, end: range.index + range.length, type: "Organization" });
+                    var new_organization = { Id: self.orgNo++, Text: text, begin: range.index, end: range.index + range.length };
+                    self.insertOrganization(new_organization);
+                    new_entity = { begin: range.index, end: range.index + range.length, type: "Organization" };
+                    self.insertEntity(new_entity);
                 }
                 else if (self.selectedOption() === "Location") {
                     quill.format("color", "blue");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    self.Locations.push({ Id: self.locNo++, Text: text, begin: range.index, end: range.index + range.length });
-                    self.AllEntities.push({ begin: range.index, end: range.index + range.length, type: "Location" });
+                    var new_location = { Id: self.locNo++, Text: text, begin: range.index, end: range.index + range.length };
+                    self.insertLocation(new_location);
+                    new_entity = { begin: range.index, end: range.index + range.length, type: "Location" };
+                    self.insertEntity(new_entity);
                 }
                 else if (self.selectedOption() === "Person") {
                     quill.format("color", "green");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    self.People.push({ Id: self.perNo++, Text: text, begin: range.index, end: range.index + range.length });
-                    self.AllEntities.push({ begin: range.index, end: range.index + range.length, type: "Person" });
+                    var new_person = { Id: self.perNo++, Text: text, begin: range.index, end: range.index + range.length };
+                    self.insertPerson(new_person);
+                    new_entity = { begin: range.index, end: range.index + range.length, type: "Person" };
+                    self.insertEntity(new_entity);
                 }
             }
         } else {
