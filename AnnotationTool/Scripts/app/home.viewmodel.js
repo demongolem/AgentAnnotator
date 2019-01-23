@@ -643,6 +643,25 @@ function HomeViewModel(app, dataModel) {
         });
     };
 
+    self.spell_correct = function (test) {
+        var quillText = quill.getText();
+        var url = "/advanced/spell_correct";
+        var allData = { RawText: quillText };
+        $.ajax({
+            type: "POST",
+            data: allData,
+            url: apiBaseUrl + url,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "text",
+            success: function (rsp) {
+                alert('Implement Me!');
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    };
+
     self.save = function (test) {
         var quillText = quill.getText();
         var url = "/file/save";

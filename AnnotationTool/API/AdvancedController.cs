@@ -1,5 +1,4 @@
-﻿using AngleSharp.Extensions;
-using AngleSharp.Parser.Html;
+﻿using AngleSharp.Html.Parser;
 using AnnotationTool.Bean;
 using AnnotationTool.Models;
 using AnnotationTool.NLP;
@@ -61,14 +60,26 @@ namespace AnnotationTool.API
             {
                 string newFullText = "";
                 var parser = new HtmlParser();
-                var htmlDocument = parser.Parse(fulltext);
+                var htmlDocument = parser.ParseDocument(fulltext);
                 var paragraphCssSelector = htmlDocument.QuerySelectorAll("p");
                 foreach (var item in paragraphCssSelector)
                 {
-                    newFullText += item.Text() + Environment.NewLine;
+                    newFullText += item.TextContent + Environment.NewLine;
                 }
                 fulltext = newFullText;
             }
+            return fulltext;
+        }
+
+        [HttpPost]
+        [Route("spell_correct")]
+        public string SpellCorrect(Models.Text doc)
+        {
+            string fulltext = doc.RawText;
+
+            // Here, we manipulate fulltext if there are spelling errors present
+            // then we return the edited text
+
             return fulltext;
         }
 

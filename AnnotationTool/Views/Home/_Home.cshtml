@@ -89,8 +89,7 @@
                 <th style="min-width:100px">Score</th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
     </table>
 </div>
 
@@ -102,15 +101,21 @@
 <div style="height: 25px">
 </div>
 
-<button type="button" class="btn btn-primary" data-bind="click: $data.auto_mentions" style="margin-top: 10px;">Auto Annotate Mentions</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.auto_doc_sentiment" style="margin-top: 10px;">Auto Annotate Document Sentiment</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.auto_entity_sentiment" style="margin-top: 10px;">Auto Annotate Entity Sentiment</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.sentence_splitter" style="margin-top: 10px;">Split Sentences</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.auto_sent_sentiment" style="margin-top: 10px;">Auto Annotate Sentence Sentiment</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.language" style="margin-top: 10px;">Identify Language</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.parse_html" style="margin-top: 10px;">Parse HTML</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.save" style="margin-top: 10px;">Save</button>
-<button type="button" class="btn btn-primary" data-bind="click: $data.clear" style="margin-top: 10px;">Clear</button>
+
+<div id="top_button_row">
+    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_mentions" style="margin-top: 10px;">Auto Annotate Mentions</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_doc_sentiment" style="margin-top: 10px;">Auto Annotate Document Sentiment</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_entity_sentiment" style="margin-top: 10px;">Auto Annotate Entity Sentiment</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.sentence_splitter" style="margin-top: 10px;">Split Sentences</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_sent_sentiment" style="margin-top: 10px;">Auto Annotate Sentence Sentiment</button>
+</div>
+<div id="bottom_button_row">
+    <button type="button" class="btn btn-primary" data-bind="click: $data.language" style="margin-top: 10px;">Identify Language</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.parse_html" style="margin-top: 10px;">Parse HTML</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.spell_correct" style="margin-top: 10px;">Correct Spelling</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.save" style="margin-top: 10px;">Save</button>
+    <button type="button" class="btn btn-primary" data-bind="click: $data.clear" style="margin-top: 10px;">Clear</button>
+</div>
 
 <div style="height: 25px">
 </div>

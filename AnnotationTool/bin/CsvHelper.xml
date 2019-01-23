@@ -988,7 +988,7 @@
         <member name="P:CsvHelper.Configuration.Configuration.Delimiter">
             <summary>
             Gets or sets the delimiter used to separate fields.
-            Default is CultureInfo.CurrentCulture.TextInfo.ListSeparator.
+            Default is CultureInfo.TextInfo.ListSeparator.
             </summary>
         </member>
         <member name="P:CsvHelper.Configuration.Configuration.Escape">
@@ -1061,6 +1061,7 @@
         <member name="P:CsvHelper.Configuration.Configuration.CultureInfo">
             <summary>
             Gets or sets the culture info used to read an write CSV files.
+            Default is <see cref="P:System.Globalization.CultureInfo.CurrentCulture"/>.
             </summary>
         </member>
         <member name="P:CsvHelper.Configuration.Configuration.IgnoreQuotes">
@@ -1112,8 +1113,17 @@
         </member>
         <member name="M:CsvHelper.Configuration.Configuration.#ctor">
             <summary>
-            Creates a new CsvConfiguration.
+            Initializes a new instance of the <see cref="T:CsvHelper.Configuration.Configuration"/> class.
             </summary>
+        </member>
+        <member name="M:CsvHelper.Configuration.Configuration.#ctor(System.Globalization.CultureInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CsvHelper.Configuration.Configuration"/> class
+            using the given <see cref="T:System.Globalization.CultureInfo"/>. Since <see cref="P:CsvHelper.Configuration.Configuration.Delimiter"/>
+            uses <see cref="P:CsvHelper.Configuration.Configuration.CultureInfo"/> for it's default, the given <see cref="T:System.Globalization.CultureInfo"/>
+            will be used instead.
+            </summary>
+            <param name="cultureInfo">The culture information.</param>
         </member>
         <member name="M:CsvHelper.Configuration.Configuration.RegisterClassMap``1">
             <summary>
