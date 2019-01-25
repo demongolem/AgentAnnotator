@@ -11,11 +11,14 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web.Http;
 using static edu.stanford.nlp.ling.CoreAnnotations;
+using Word2Vec.Net;
+using edu.stanford.nlp.ling;
 
 namespace AnnotationTool.API
 {
@@ -76,11 +79,43 @@ namespace AnnotationTool.API
         public string SpellCorrect(Models.Text doc)
         {
             string fulltext = doc.RawText;
+            var distance = new Distance(AppDomain.CurrentDomain.BaseDirectory + "\\wordvec\\my_output_model.bin");
 
             // Here, we manipulate fulltext if there are spelling errors present
             // then we return the edited text
 
-            return fulltext;
+            // reconstruct it maybe?
+            string correctedText = "";
+
+            // fetch tokenization for the document as we are correcting individual words
+            edu.stanford.nlp.pipeline.Annotation document = new edu.stanford.nlp.pipeline.Annotation(fulltext);
+            PipelineDispenser.GetNewPipeline().annotate(document);
+            List<CoreMap> sentences = JavaExtensions.ToList<CoreMap>((java.util.List)document.get(typeof(SentencesAnnotation)));
+            foreach (CoreMap sentence in sentences)
+            {
+                foreach(CoreLabel token in JavaExtensions.ToList<CoreMap>((java.util.List)sentence.get(typeof(TokensAnnotation))))
+                {
+                    BestWord[] bestwords = distance.Search(token.word());
+
+                    if (bestwords.Length == 0)
+                    {
+                        correctedText = correctedText + token.word();
+                    }
+                    else
+                    {
+                        // for debug purposes.  use this to do the corrections
+                        foreach (var bestWord in bestwords.Where(x => !string.IsNullOrEmpty(x.Word)))
+                        {
+                            //correctedText = correctedText + "For " + token.word() + " we got " + bestWord.Word + " with score " + bestWord.Distance + "\n";
+                            //Console.WriteLine("{0}\t\t{1}", bestWord.Word, bestWord.Distance);
+                        }
+                        // We have to make a proper decision on the next line
+                        correctedText = correctedText + token.word();
+                    }
+                }
+            }
+
+            return correctedText;
         }
 
         [HttpPost]

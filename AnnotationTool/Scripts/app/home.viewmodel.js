@@ -655,6 +655,7 @@ function HomeViewModel(app, dataModel) {
             dataType: "text",
             success: function (rsp) {
                 alert('Implement Me!');
+                console.log(rsp);
             },
             error: function () {
                 alert("error");
