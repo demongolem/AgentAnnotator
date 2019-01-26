@@ -74,12 +74,16 @@ namespace AnnotationTool.API
             return fulltext;
         }
 
+        // TODO: Make this async.  This could take a while the way it is currently implemented.
         [HttpPost]
         [Route("spell_correct")]
         public string SpellCorrect(Models.Text doc)
         {
             string fulltext = doc.RawText;
+
+            // These next two lines really should not be done per call.  They should be moved to startup
             var distance = new Distance(AppDomain.CurrentDomain.BaseDirectory + "\\wordvec\\my_output_model.bin");
+            var spellingDistance = new Distance(AppDomain.CurrentDomain.BaseDirectory + "\\wordvec\\spelling_model.bin");
 
             // Here, we manipulate fulltext if there are spelling errors present
             // then we return the edited text
@@ -95,21 +99,50 @@ namespace AnnotationTool.API
             {
                 foreach(CoreLabel token in JavaExtensions.ToList<CoreMap>((java.util.List)sentence.get(typeof(TokensAnnotation))))
                 {
+
+                    // we have to look this token up in both normal word space as well as spelling word space
+                    // at that point, we would do the mathematics to compute the resultant word vector
+
+                    /*You have something like:
+
+                    [reliable] - [relieable] + [foriegn] ==> [foreign]
+                    To generalise this approach(make it less reliant on reliable…), 
+                    we can build a spelling transformation vector by taking the average 
+                    difference between a set of pairs of correct and incorrectly spelled words.  
+                    We can then fix a spelling mistake by subtracting this spelling transformation 
+                    vector from the incorrectly spelled word vector and finding the word closest 
+                    to where we end up.*/
+
                     BestWord[] bestwords = distance.Search(token.word());
+                    BestWord[] spellingBestwords = spellingDistance.Search(token.word());
 
                     if (bestwords.Length == 0)
                     {
-                        correctedText = correctedText + token.word();
+                        string correction = token.word();    
+
+                        // we assume there might be a spelling mistake
+                        if (spellingBestwords.Length != 0)
+                        {
+                            correction = spellingBestwords[0].Word;
+                        }
+
+                        // We have to make a proper decision on the next line
+                        if (correctedText.Length > 0)
+                        {
+                            correctedText += " ";
+                        }
+                        correctedText = correctedText + correction;
                     }
                     else
                     {
-                        // for debug purposes.  use this to do the corrections
-                        foreach (var bestWord in bestwords.Where(x => !string.IsNullOrEmpty(x.Word)))
+                        // we assume that this is spelled right since our main vector knows of it
+
+                        // this is really not the correct way to construct the doucment because space is not
+                        // always the appropriate whitespace.
+                        if (correctedText.Length > 0)
                         {
-                            //correctedText = correctedText + "For " + token.word() + " we got " + bestWord.Word + " with score " + bestWord.Distance + "\n";
-                            //Console.WriteLine("{0}\t\t{1}", bestWord.Word, bestWord.Distance);
+                            correctedText += " ";
                         }
-                        // We have to make a proper decision on the next line
                         correctedText = correctedText + token.word();
                     }
                 }

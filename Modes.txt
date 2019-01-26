@@ -1,0 +1,4 @@
+There are 13 Buttons within Agent Annotator.  We label the buttons 0 through 12 going from upper left corner to lower right corner.
+
+Buttons 0,1 and 2 are the top 3 buttons associated with file activities.
+Buttons 3-12 are all associated with activities that once can do on an open file.
