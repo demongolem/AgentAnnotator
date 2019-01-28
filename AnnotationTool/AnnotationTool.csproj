@@ -321,7 +321,7 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="Word2Vec.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Word2Vec.Net.1.0.0\lib\net45\Word2Vec.Net.dll</HintPath>
+      <HintPath>..\packages\Word2Vec.Net.0.3.0\lib\net45\Word2Vec.Net.dll</HintPath>
     </Reference>
     <Reference Include="xom, Version=1.2.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stanford.NLP.CoreNLP.3.9.1.0\lib\xom.dll</HintPath>
