@@ -3,12 +3,66 @@
 var oldSenSentiment = [];
 var splitSentences = [];
 
+var stateMode = 1;
+applyMode();
+
 function turnOnWait() {
     $("body").css("cursor", "progress");
 }
 
 function turnOffWait() {
     $("body").css("cursor", "default");
+}
+
+function applyMode() {
+    if (stateMode === 1) {
+        // only have buttons 0, 1 and 2 enabled
+        $('#button0').prop('disabled', false);
+        $('#button1').prop('disabled', false);
+        $('#button2').prop('disabled', false);
+        $('#button3').prop('disabled', true);
+        $('#button4').prop('disabled', true);
+        $('#button5').prop('disabled', true);
+        $('#button6').prop('disabled', true);
+        $('#button7').prop('disabled', true);
+        $('#button8').prop('disabled', true);
+        $('#button9').prop('disabled', true);
+        $('#button10').prop('disabled', true);
+        $('#button11').prop('disabled', true);
+        $('#button12').prop('disabled', true);
+    } else if (stateMode === 2) {
+        // have all buttons except sentence sentiment enabled
+        $('#button0').prop('disabled', false);
+        $('#button1').prop('disabled', false);
+        $('#button2').prop('disabled', false);
+        $('#button3').prop('disabled', false);
+        $('#button4').prop('disabled', false);
+        $('#button5').prop('disabled', false);
+        $('#button6').prop('disabled', false);
+        $('#button7').prop('disabled', true);
+        $('#button8').prop('disabled', false);
+        $('#button9').prop('disabled', false);
+        $('#button10').prop('disabled', false);
+        $('#button11').prop('disabled', false);
+        $('#button12').prop('disabled', false);
+    } else if (stateMode === 3) {
+        // have all buttons enabled
+        $('#button0').prop('disabled', false);
+        $('#button1').prop('disabled', false);
+        $('#button2').prop('disabled', false);
+        $('#button3').prop('disabled', false);
+        $('#button4').prop('disabled', false);
+        $('#button5').prop('disabled', false);
+        $('#button6').prop('disabled', false);
+        $('#button7').prop('disabled', false);
+        $('#button8').prop('disabled', false);
+        $('#button9').prop('disabled', false);
+        $('#button10').prop('disabled', false);
+        $('#button11').prop('disabled', false);
+        $('#button12').prop('disabled', false);
+    } else {
+        console.log("Unidentified mode " + stateMode);
+    }
 }
 
 function HomeViewModel(app, dataModel) {
@@ -518,7 +572,7 @@ function HomeViewModel(app, dataModel) {
                         self.selectedSenSentimentOption()[i]('Very Positive');
                     } else if (value < -0.75) {
                         self.selectedSenSentimentOption()[i]('Very Negative');
-                    } else if (value > 0.25 ) {
+                    } else if (value > 0.25) {
                         self.selectedSenSentimentOption()[i]('Positive');
                     } else if (value < -0.25) {
                         self.selectedSenSentimentOption()[i]('Negative');
@@ -535,7 +589,7 @@ function HomeViewModel(app, dataModel) {
                 turnOffWait();
             }
         });
-    }
+    };
 
     self.sentence_splitter = function (test) {
         var quillText = quill.getText();
@@ -591,6 +645,8 @@ function HomeViewModel(app, dataModel) {
                     $(column_sel).append(dropdown);
                     ko.applyBindings(app.Views.Home, document.getElementById('sen_' + i));
                 }
+                stateMode = 3;
+                applyMode();
             },
             error: function () {
                 alert("error");
@@ -749,6 +805,8 @@ function HomeViewModel(app, dataModel) {
                 $('#hidden_sentences').css('display', 'none');
             });
             $("#current_file").text(self.fileName());
+            stateMode = 2;
+            applyMode();
         };
         reader.readAsText(input.files[0]);
     };
@@ -868,6 +926,10 @@ function HomeViewModel(app, dataModel) {
                     }
 
                 }
+
+                stateMode = 2;
+                applyMode();
+
                 //var array = rsp.split(",");
                 //for (var x = 0; x < array.length; x++) {
                 //    array[x] = array[x].replace(/"/g, "");

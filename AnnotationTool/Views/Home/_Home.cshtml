@@ -5,14 +5,14 @@
     @*<input type="file" name="name" class="btn btn-primary btn-lg" onchange="openFile(event)" value="" />*@@*<a class="btn btn-primary btn-lg" data-target=".bs-example-modal-sm" id="files" >Upload File</a>*@
     <label class="btn btn-primary btn-lg ">
         Upload File
-        <input type="file" style="position:relative; overflow:hidden; display:none;" data-bind="event: {change: $data.openFile }" hidden />
+        <input type="file" id="button0" style="position:relative; overflow:hidden; display:none;" data-bind="event: {change: $data.openFile }" hidden />
     </label>
     <label class="btn btn-primary btn-lg ">
         Upload Directory
-        <input type="file" style="position:relative; overflow:hidden; display:none;" data-bind="event: {change: $data.openDirectory}" hidden webkitdirectory />
+        <input type="file" id="button1" style="position:relative; overflow:hidden; display:none;" data-bind="event: {change: $data.openDirectory}" hidden webkitdirectory />
     </label>
 
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-bind="click: function(data){ $data.openAnnotatedFile(null)} ">Open Annotated File</button>
+    <button id="button2" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" data-bind="click: function(data){ $data.openAnnotatedFile(null)} ">Open Annotated File</button>
 </div>
 <div style="text-align:center">
     <span style="font-size: 24px">
@@ -101,20 +101,19 @@
 <div style="height: 25px">
 </div>
 
-
 <div id="top_button_row">
-    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_mentions" style="margin-top: 10px;">Auto Annotate Mentions</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_doc_sentiment" style="margin-top: 10px;">Auto Annotate Document Sentiment</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_entity_sentiment" style="margin-top: 10px;">Auto Annotate Entity Sentiment</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.sentence_splitter" style="margin-top: 10px;">Split Sentences</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.auto_sent_sentiment" style="margin-top: 10px;">Auto Annotate Sentence Sentiment</button>
+    <button type="button" id="button3" class="btn btn-primary" data-bind="click: $data.auto_mentions" style="margin-top: 10px;">Auto Annotate Mentions</button>
+    <button type="button" id="button4" class="btn btn-primary" data-bind="click: $data.auto_doc_sentiment" style="margin-top: 10px;">Auto Annotate Document Sentiment</button>
+    <button type="button" id="button5" class="btn btn-primary" data-bind="click: $data.auto_entity_sentiment" style="margin-top: 10px;">Auto Annotate Entity Sentiment</button>
+    <button type="button" id="button6" class="btn btn-primary" data-bind="click: $data.sentence_splitter" style="margin-top: 10px;">Split Sentences</button>
+    <button type="button" id="button7" class="btn btn-primary" data-bind="click: $data.auto_sent_sentiment" style="margin-top: 10px;">Auto Annotate Sentence Sentiment</button>
 </div>
 <div id="bottom_button_row">
-    <button type="button" class="btn btn-primary" data-bind="click: $data.language" style="margin-top: 10px;">Identify Language</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.parse_html" style="margin-top: 10px;">Parse HTML</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.spell_correct" style="margin-top: 10px;">Correct Spelling</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.save" style="margin-top: 10px;">Save</button>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.clear" style="margin-top: 10px;">Clear</button>
+    <button type="button" id="button8" class="btn btn-primary" data-bind="click: $data.language" style="margin-top: 10px;">Identify Language</button>
+    <button type="button" id="button9" class="btn btn-primary" data-bind="click: $data.parse_html" style="margin-top: 10px;">Parse HTML</button>
+    <button type="button" id="button10" class="btn btn-primary" data-bind="click: $data.spell_correct" style="margin-top: 10px;">Correct Spelling</button>
+    <button type="button" id="button11" class="btn btn-primary" data-bind="click: $data.save" style="margin-top: 10px;">Save</button>
+    <button type="button" id="button12" class="btn btn-primary" data-bind="click: $data.clear" style="margin-top: 10px;">Clear</button>
 </div>
 
 <div style="height: 25px">
