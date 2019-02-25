@@ -236,7 +236,7 @@
             Ignore the member when reading and writing.
             If this member has already been mapped as a reference
             member, either by a class map, or by automapping, calling
-            this method will not ingore all the child members down the
+            this method will not ignore all the child members down the
             tree that have already been mapped.
             </summary>
         </member>
@@ -962,7 +962,7 @@
         </member>
         <member name="P:CsvHelper.Configuration.Configuration.GetConstructor">
             <summary>
-            Chooses the constructor to use for constuctor mapping.
+            Chooses the constructor to use for constructor mapping.
             </summary>
         </member>
         <member name="P:CsvHelper.Configuration.Configuration.DynamicPropertySort">
@@ -1335,7 +1335,7 @@
         <member name="P:CsvHelper.Configuration.IParserConfiguration.IgnoreQuotes">
             <summary>
             Gets or sets a value indicating if quotes should be
-            ingored when parsing and treated like any other character.
+            ignored when parsing and treated like any other character.
             </summary>
         </member>
         <member name="P:CsvHelper.Configuration.IParserConfiguration.Quote">
@@ -1429,7 +1429,7 @@
         </member>
         <member name="P:CsvHelper.Configuration.IReaderConfiguration.GetConstructor">
             <summary>
-            Chooses the constructor to use for constuctor mapping.
+            Chooses the constructor to use for constructor mapping.
             </summary>
         </member>
         <member name="P:CsvHelper.Configuration.IReaderConfiguration.IgnoreReferences">
@@ -1861,7 +1861,7 @@
             Ignore the member when reading and writing.
             If this member has already been mapped as a reference
             member, either by a class map, or by automapping, calling
-            this method will not ingore all the child members down the
+            this method will not ignore all the child members down the
             tree that have already been mapped.
             </summary>
         </member>
@@ -1870,7 +1870,7 @@
             Ignore the member when reading and writing.
             If this member has already been mapped as a reference
             member, either by a class map, or by automapping, calling
-            this method will not ingore all the child members down the
+            this method will not ignore all the child members down the
             tree that have already been mapped.
             </summary>
             <param name="ignore">True to ignore, otherwise false.</param>
@@ -2155,7 +2155,7 @@
         <member name="P:CsvHelper.Configuration.MemberMapData.IsNameSet">
             <summary>
             Gets or sets a value indicating if the name was
-            explicitly set. True if it was explicity set,
+            explicitly set. True if it was explicitly set,
             otherwise false.
             </summary>
         </member>
@@ -2288,7 +2288,7 @@
             Ignore the member when reading and writing.
             If this member has already been mapped as a reference
             member, either by a class map, or by automapping, calling
-            this method will not ingore all the child members down the
+            this method will not ignore all the child members down the
             tree that have already been mapped.
             </summary>
         </member>
@@ -2297,7 +2297,7 @@
             Ignore the member when reading and writing.
             If this member has already been mapped as a reference
             member, either by a class map, or by automapping, calling
-            this method will not ingore all the child members down the
+            this method will not ignore all the child members down the
             tree that have already been mapped.
             </summary>
             <param name="ignore">True to ignore, otherwise false.</param>
@@ -2638,7 +2638,7 @@
         </member>
         <member name="T:CsvHelper.Configuration.ParameterMapData">
             <summary>
-            The constructor paramter data for the map.
+            The constructor parameter data for the map.
             </summary>
         </member>
         <member name="P:CsvHelper.Configuration.ParameterMapData.Parameter">
@@ -3130,7 +3130,7 @@
         </member>
         <member name="M:CsvHelper.CsvFieldReader.SetRawRecordStart(System.Int32)">
             <summary>
-            Sets the raw recodr start to the current buffer position;
+            Sets the raw record start to the current buffer position;
             </summary>
             <param name="offset">An offset for the raw record start.
             The offset should be less than 1.</param>
@@ -3349,26 +3349,26 @@
         </member>
         <member name="M:CsvHelper.CsvParser.ReadQuotedField">
             <summary>
-            Reads until the field is not quoted and a delimeter is found.
+            Reads until the field is not quoted and a delimiter is found.
             </summary>
             <returns>True if the end of the line was found, otherwise false.</returns>
         </member>
         <member name="M:CsvHelper.CsvParser.ReadQuotedFieldAsync">
             <summary>
-            Reads until the field is not quoted and a delimeter is found.
+            Reads until the field is not quoted and a delimiter is found.
             </summary>
             <returns>True if the end of the line was found, otherwise false.</returns>
         </member>
         <member name="M:CsvHelper.CsvParser.ReadDelimiter">
             <summary>
-            Reads until the delimeter is done.
+            Reads until the delimiter is done.
             </summary>
             <returns>True if a delimiter was read. False if the sequence of
             chars ended up not being the delimiter.</returns>
         </member>
         <member name="M:CsvHelper.CsvParser.ReadDelimiterAsync">
             <summary>
-            Reads until the delimeter is done.
+            Reads until the delimiter is done.
             </summary>
             <returns>True if a delimiter was read. False if the sequence of
             chars ended up not being the delimiter.</returns>
@@ -4116,8 +4116,8 @@
             <summary>
             Writes a field that has already been converted to a
             <see cref="T:System.String"/> from an <see cref="T:CsvHelper.TypeConversion.ITypeConverter"/>.
-            If the field is null, it won't get written. A type converter 
-            will always return a string, even if field is null. If the 
+            If the field is null, it won't get written. A type converter
+            will always return a string, even if field is null. If the
             converter returns a null, it means that the converter has already
             written data, and the returned value should not be written.
             </summary>
@@ -4402,7 +4402,7 @@
         </member>
         <member name="M:CsvHelper.Expressions.ObjectRecordCreator.#ctor(CsvHelper.CsvReader)">
             <summary>
-            Initializes a new instnace using the given reader.
+            Initializes a new instance using the given reader.
             </summary>
             <param name="reader"></param>
         </member>
@@ -4960,7 +4960,7 @@
         </member>
         <member name="M:CsvHelper.IFieldReader.SetRawRecordStart(System.Int32)">
             <summary>
-            Sets the raw recodr start to the current buffer position;
+            Sets the raw record start to the current buffer position;
             </summary>
             <param name="offset">An offset for the raw record start.
             The offset should be less than 1.</param>
@@ -5774,10 +5774,10 @@
         <member name="M:CsvHelper.ObjectResolver.#ctor(System.Func{System.Type,System.Boolean},System.Func{System.Type,System.Object[],System.Object},System.Boolean)">
             <summary>
             Creates an instance of the object resolver using the given can create function
-            and creat function.
+            and create function.
             </summary>
-            <param name="canResolve">A function that returns a value indicating if the resolver 
-            is able to resolve the given type. True if the type can be 
+            <param name="canResolve">A function that returns a value indicating if the resolver
+            is able to resolve the given type. True if the type can be
             resolved, otherwise false.</param>
             <param name="resolveFunction">The function that creates an object from a given type.</param>
             <param name="useFallback">A value indicating if the resolver's <see cref="P:CsvHelper.ObjectResolver.CanResolve"/>
@@ -5892,7 +5892,7 @@
         </member>
         <member name="F:CsvHelper.ReadingContext.NamedIndexCache">
             <summary>
-            Getse the named indexes cache.
+            Gets the named indexes cache.
             </summary>
         </member>
         <member name="F:CsvHelper.ReadingContext.TypeConverterOptionsCache">
@@ -6028,7 +6028,7 @@
         <member name="P:CsvHelper.ReadingContext.RawRecord">
             <summary>
             Gets all the characters of the record including
-            quotes, delimeters, and line endings.
+            quotes, delimiters, and line endings.
             </summary>
         </member>
         <member name="P:CsvHelper.ReadingContext.Field">
@@ -6084,7 +6084,7 @@
         </member>
         <member name="M:CsvHelper.RecordBuilder.#ctor(System.Int32)">
             <summary>
-            Creatse a new <see cref="T:CsvHelper.RecordBuilder"/> using the given capacity.
+            Creates a new <see cref="T:CsvHelper.RecordBuilder"/> using the given capacity.
             </summary>
             <param name="capacity">The initial capacity.</param>
         </member>
@@ -6447,8 +6447,8 @@
         <member name="T:CsvHelper.TypeConversion.EnumerableConverter">
             <summary>
             Throws an exception when used. This is here so that it's apparent
-            that there is no support for <see cref="T:System.Collections.IEnumerable"/> type coversion. A custom
-            converter will need to be created to have a field convert to and 
+            that there is no support for <see cref="T:System.Collections.IEnumerable"/> type conversion. A custom
+            converter will need to be created to have a field convert to and
             from an IEnumerable.
             </summary>
         </member>

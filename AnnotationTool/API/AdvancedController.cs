@@ -37,7 +37,7 @@ namespace AnnotationTool.API
             List<CoreMap> sentences = JavaExtensions.ToList<CoreMap>((java.util.List)document.get(typeof(SentencesAnnotation)));
             foreach (CoreMap sentence in sentences)
             {
-                Models.Text sentenceObject = new Models.Text();
+                Models.Text sentenceObject = new Text();
                 sentenceObject.RawText = (string)sentence.get(typeof(TextAnnotation));
                 toReturn.Add(sentenceObject);
             }
