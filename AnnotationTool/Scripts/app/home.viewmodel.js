@@ -30,6 +30,7 @@ function applyMode() {
         $('#button10').prop('disabled', true);
         $('#button11').prop('disabled', true);
         $('#button12').prop('disabled', true);
+        $('#button13').prop('disabled', true);
     } else if (stateMode === 2) {
         // have all buttons except sentence sentiment enabled
         $('#button0').prop('disabled', false);
@@ -45,6 +46,7 @@ function applyMode() {
         $('#button10').prop('disabled', false);
         $('#button11').prop('disabled', false);
         $('#button12').prop('disabled', false);
+        $('#button13').prop('disabled', false);
     } else if (stateMode === 3) {
         // have all buttons enabled
         $('#button0').prop('disabled', false);
@@ -60,6 +62,7 @@ function applyMode() {
         $('#button10').prop('disabled', false);
         $('#button11').prop('disabled', false);
         $('#button12').prop('disabled', false);
+        $('#button13').prop('disabled', false);
     } else {
         console.log("Unidentified mode " + stateMode);
     }
@@ -667,6 +670,26 @@ function HomeViewModel(app, dataModel) {
             success: function (rsp) {
                 answer = JSON.parse(rsp);
                 $("#doc_lang").text(answer);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    };
+
+    self.topics = function (test) {
+        var quillText = quill.getText();
+        var url = "/advanced/show_topics";
+        var allData = { RawText: quillText };
+        $.ajax({
+            type: "POST",
+            data: allData,
+            url: apiBaseUrl + url,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            dataType: "text",
+            success: function (rsp) {
+                answer = JSON.parse(rsp);
+                $("#doc_topic_1").text(answer);
             },
             error: function () {
                 alert("error");

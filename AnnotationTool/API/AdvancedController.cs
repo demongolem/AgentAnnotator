@@ -55,6 +55,37 @@ namespace AnnotationTool.API
         }
 
         [HttpPost]
+        [Route("show_topics")]
+        public async System.Threading.Tasks.Task<string> ShowTopicsAsync(Models.Text doc)
+        {
+            string text = doc.RawText;
+            var url = ConfigurationManager.AppSettings["TopicServiceUrl"];
+            var endpoint = "/topics";
+            var fullUrl = url + endpoint;
+            using (var client = new HttpClient())
+            {
+                //set up client
+                client.BaseAddress = new Uri(url);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.Timeout = TimeSpan.FromMinutes(10);
+
+                var nvc = new List<KeyValuePair<string, string>>();
+                var texts = doc.RawText;
+                nvc.Add(new KeyValuePair<string, string>("texts", texts));
+
+                var req = new HttpRequestMessage(HttpMethod.Post, fullUrl)
+                {
+                    Content = new FormUrlEncodedContent(nvc)
+                };
+
+                var response = await client.SendAsync(req);
+                var result = await response.Content.ReadAsStringAsync();
+                return result;
+            }
+        }
+
+        [HttpPost]
         [Route("parse_html")]
         public string ParseHtml(Models.Text doc)
         {
