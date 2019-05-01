@@ -440,6 +440,50 @@ namespace AnnotationTool.API
                 }
                 return true;
             }
+            else if (type == "luis")
+            {
+                var newFilename = Path.ChangeExtension(originalFilename, ".lou");
+                string fulltext = "";
+                if (clientAnnotations != null)
+                {
+                    foreach (Annotation clientAnnotation in clientAnnotations)
+                    {
+                        EntityMention em = new EntityMention();
+                        em.begin = clientAnnotation.begin;
+                        em.end = clientAnnotation.end;
+                        em.type = clientAnnotation.type;
+                        fulltext += (
+                            "{" +
+                            "\"entity\": \"" + em.type
+                            + "\", \"startPos\": " + em.begin
+                            + ", \"endPos\": " + em.end
+                            + "}," + "\n"
+                            );
+                    }
+                }
+
+                try
+                {
+                    string filePath = null;
+                    if (ConfigurationManager.AppSettings["environment"] == Debug)
+                        filePath = System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["filesRoot"] + todayString + "/" + user + "/" + newFilename);
+                    if (ConfigurationManager.AppSettings["environment"] == Release)
+                        filePath = ConfigurationManager.AppSettings["filesRoot"] + todayString + "/" + user + "/" + newFilename;
+                    System.IO.FileInfo file = new System.IO.FileInfo(filePath);
+                    file.Directory.Create();
+                    using (StreamWriter annFile = new StreamWriter(file.FullName, false))
+                    {
+                        annFile.WriteLine("###THIS IS A COMMENT BLOCK###");
+                        annFile.WriteLine("###FORMAT: " + type + " ###");
+                        annFile.WriteLine(fulltext);
+                    }
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
             else
             {
                 return false;

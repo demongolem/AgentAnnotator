@@ -97,6 +97,7 @@ function HomeViewModel(app, dataModel) {
     self.annotationTypes.push("default");
     self.annotationTypes.push("xml");
     self.annotationTypes.push("stanford");
+    self.annotationTypes.push("luis");
     self.selectedFormatOption = ko.observable("default");
 
     self.Organizations = ko.observableArray([]);
