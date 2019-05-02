@@ -94,6 +94,14 @@ namespace AnnotationTool.API
         }
 
         [HttpGet]
+        [Route("entities")]
+        public string GetConfigurationEntities()
+        {
+            List<EntityType> entityTypes = fetchEntityTypesFromConfiguration();
+            return JsonConvert.SerializeObject(entityTypes);
+        }
+
+        [HttpGet]
         [Route("open")]
         public string OpenFile(string location)
         {
@@ -114,16 +122,7 @@ namespace AnnotationTool.API
             // Second read the ann file
             //===========================================
             // Read configuration for entity types first
-            string[] entityTypeLines = File.ReadAllLines(System.Web.HttpContext.Current.Server.MapPath("~/admin/entity_types.txt"));
-            List<EntityType> entityTypes = new List<EntityType>();
-            foreach (string entityTypeLine in entityTypeLines)
-            {
-                string[] parts = entityTypeLine.Split('\t');
-                EntityType et = new EntityType();
-                et.Id = Convert.ToInt32(parts[0]);
-                et.Type = parts[1];
-                entityTypes.Add(et);
-            }
+            List<EntityType> entityTypes = fetchEntityTypesFromConfiguration();
 
             try {
                 string[] allLines = File.ReadAllLines(location);
@@ -530,6 +529,20 @@ namespace AnnotationTool.API
             }
             return 0;
         }
-    }
 
+        private List<EntityType> fetchEntityTypesFromConfiguration()
+        {
+            string[] entityTypeLines = File.ReadAllLines(System.Web.HttpContext.Current.Server.MapPath("~/admin/entity_types.txt"));
+            List<EntityType> entityTypes = new List<EntityType>();
+            foreach (string entityTypeLine in entityTypeLines)
+            {
+                string[] parts = entityTypeLine.Split('\t');
+                EntityType et = new EntityType();
+                et.Id = Convert.ToInt32(parts[0]);
+                et.Type = parts[1];
+                entityTypes.Add(et);
+            }
+            return entityTypes;
+        }
+    }
 }

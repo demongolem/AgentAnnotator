@@ -3,7 +3,34 @@
 var oldSenSentiment = [];
 var splitSentences = [];
 
+var legal_entities = [];
+
 var stateMode = 1;
+
+$(document).ready(function () {
+    var url = apiBaseUrl + "/file/entities";
+    $.ajax({
+        type: "GET",
+        url: url,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rsp) {
+            result = JSON.parse(rsp);
+            for (var x = 0; x < result.length; x++) {
+                var Id = result[x].Id;
+                var Type = result[x].Type;
+                // here we store for later
+                legal_entities.push(Type);
+                // and here we draw on the screen
+            }
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+
+});
+
 applyMode();
 
 function turnOnWait() {
