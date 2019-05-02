@@ -23,6 +23,9 @@
     <img style="height:25px;width:25px" src="/Content/left_arrow.png" data-bind="click: $data.openLeftFile" />
     <img style="height:25px;width:25px" src="/Content/right_arrow.png" data-bind="click: $data.openRightFile" />
 </div>
+<div>
+    <h2>Known Entity Types:</h2>
+</div>
 <div style="margin-bottom:10px;">
     <h4 class="" style="display:inline-block">Organizations:</h4>
     <span data-bind="foreach: Organizations">
@@ -60,6 +63,10 @@
 </div>
 
 <select data-bind="options: entityTypes, optionsText: $data, value: selectedOption, optionsCaption: 'Choose...'"></select>
+
+<div>
+    &nbsp;
+</div>
 
 <div id="editor" style="height: 250px">
 
