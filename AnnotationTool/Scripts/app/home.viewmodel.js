@@ -3,8 +3,6 @@
 var oldSenSentiment = [];
 var splitSentences = [];
 
-var legal_entities = [];
-
 var stateMode = 1;
 
 $(document).ready(function () {
@@ -18,11 +16,15 @@ $(document).ready(function () {
             result = JSON.parse(rsp);
             for (var x = 0; x < result.length; x++) {
                 var Id = result[x].Id;
-                var Type = result[x].Type;
-                // here we store for later
-                legal_entities.push(Type);
+                var Type = result[x].Type 
                 // and here we draw on the screen
+                $('#entity_block').append('<div style="margin-bottom:10px;">    <h4 class="" style="display:inline-block">' + Type + 's:</h4>    <span data-bind="foreach: AllEntities">        <span data-bind="if: type == \'' + Type + '\'">        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="event: { mouseenter: $parent.findEntity, mouseleave: $parent.leaveEntity } ">            <span data-bind="text: Text"></span>            <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeEntity"></span>        </span>        </span>    </span></div>');
+                // and here we populate the dropdown
+                app.Views.Home.entityTypes.push(Type);
             }
+            // and apply bindings to knockout, this is essential
+            ko.cleanNode(document.getElementById('entity_block'));
+            ko.applyBindings(app.Views.Home, document.getElementById('entity_block'));
         },
         error: function () {
             alert("error");
@@ -102,9 +104,6 @@ function HomeViewModel(app, dataModel) {
     self.text = ko.observable("");
 
     self.entityTypes = ko.observableArray([]);
-    self.entityTypes.push("Organization");
-    self.entityTypes.push("Location");
-    self.entityTypes.push("Person" );
     self.selectedOption = ko.observable("");
 
     self.sentimentTypes = ko.observableArray([]);
@@ -127,15 +126,10 @@ function HomeViewModel(app, dataModel) {
     self.annotationTypes.push("luis");
     self.selectedFormatOption = ko.observable("default");
 
-    self.Organizations = ko.observableArray([]);
-    self.Locations = ko.observableArray([]);
-    self.People = ko.observableArray([]);
     self.AllEntities = ko.observableArray([]);
     self.fileName = ko.observable();
 
-    self.orgNo = 0;
-    self.locNo = 0;
-    self.perNo = 0;
+    self.entityNo = 0;
 
     self.filePath = ko.observable();
     self.selectedPath = ko.observable();
@@ -163,143 +157,30 @@ function HomeViewModel(app, dataModel) {
 
     self.folderFile = ko.observableArray();
 
-    self.findOrganization = function (org) {
+    self.findEntity = function (ent) {
         var begin = org.begin;
         var end = org.end;
         quill.formatText(begin, end - begin, "background-color", "yellow");
     };
 
-    self.leaveOrganization = function (org) {
+    self.leaveEntity = function (ent) {
         var begin = org.begin;
         var end = org.end;
         quill.formatText(begin, end - begin, "background-color", "white");
     };
 
-    self.findLocation = function (loc) {
-        var begin = loc.begin;
-        var end = loc.end;
-        quill.formatText(begin, end - begin, "background-color", "yellow");
-    };
-
-    self.leaveLocation = function (loc) {
-        var begin = loc.begin;
-        var end = loc.end;
-        quill.formatText(begin, end - begin, "background-color", "white");
-    };
-
-    self.findPerson = function (per) {
-        var begin = per.begin;
-        var end = per.end;
-        quill.formatText(begin, end - begin, "background-color", "yellow");
-    };
-
-    self.leavePerson = function (per) {
-        var begin = per.begin;
-        var end = per.end;
-        quill.formatText(begin, end - begin, "background-color", "white");
-    };
-
-    self.removeOrganization = function (org) {
-        var begin = org.begin;
-        var end = org.end;
-        var organizations = self.Organizations();
-        for (var x = 0; x < organizations.length; x++) {
-            if (organizations[x].Id === org.Id) {
-                self.Organizations.remove(organizations[x]);
+    self.removeEntity = function (ent) {
+        var begin = ent.begin;
+        var end = ent.end;
+        var entities = self.AllEntities();
+        for (var x = 0; x < entities.length; x++) {
+            if (entities[x].Id === ent.Id) {
+                self.AllEntities.remove(entities[x]);
                 quill.removeFormat(begin, end - begin);
                 break;
             }
         }
-    };
-
-    self.removeLocation = function (loc) {
-        var begin = loc.begin;
-        var end = loc.end;
-        var locations = self.Locations();
-        for (var x = 0; x < locations.length; x++) {
-            if (locations[x].Id === loc.Id) {
-                self.Locations.remove(locations[x]);
-                quill.removeFormat(begin, end - begin);
-                break;
-            }
-        }
-    };
-
-    self.removePeople = function (person) {
-        var begin = person.begin;
-        var end = person.end;
-        var people = self.People();
-        for (var x = 0; x < people.length; x++) {
-            if (people[x].Id === person.Id) {
-                self.People.remove(people[x]);
-                quill.removeFormat(begin, end - begin);
-                break;
-            }
-        }
-    };
-
-    self.insertOrganization = function(new_org) {
-        var new_begin = parseInt(new_org['begin']);
-        var new_end = parseInt(new_org['end']);
-        var organizations = self.Organizations();
-        var insert_point = organizations.length;
-        if (insert_point === 0) {
-            self.Organizations.push(new_org);
-            return;
-        }
-        for (var x = 0; x < organizations.length; x++) {
-            var this_org = organizations[x];
-            var this_begin = this_org.begin;
-            var this_end = this_org.end;
-            if (this_begin > new_begin) {
-                insert_point = x;
-                break;
-            }
-        }
-        self.Organizations.splice(insert_point, 0, new_org);
-    };
-
-    self.insertLocation = function (new_loc) {
-        var new_begin = parseInt(new_loc['begin']);
-        var new_end = parseInt(new_loc['end']);
-        var locations = self.Locations();
-        var insert_point = locations.length;
-        if (insert_point === 0) {
-            self.Locations.push(new_loc);
-            return;
-        }
-        for (var x = 0; x < locations.length; x++) {
-            var this_loc = locations[x];
-            var this_begin = this_loc.begin;
-            var this_end = this_loc.end;
-            if (this_begin > new_begin) {
-                insert_point = x;
-                break;
-            }
-        }
-        self.Locations.splice(insert_point, 0, new_loc);
-    };
-
-    self.insertPerson = function (new_per) {
-        var new_begin = parseInt(new_per['begin']);
-        var new_end = parseInt(new_per['end']);
-        var persons = self.People();
-        var insert_point = persons.length;
-        if (insert_point === 0) {
-            self.People.push(new_per);
-            return;
-        }
-        for (var x = 0; x < persons.length; x++) {
-            var this_per = persons[x];
-            var this_begin = this_per.begin;
-            var this_end = this_per.end;
-            if (this_begin > new_begin) {
-                insert_point = x;
-                break;
-            }
-        }
-        self.People.splice(insert_point, 0, new_per);
-    };
+    }
 
     self.insertEntity = function (new_entity) {
         var new_begin = parseInt(new_entity['begin']);
@@ -311,7 +192,7 @@ function HomeViewModel(app, dataModel) {
             return;
         }
         for (var x = 0; x < entities.length; x++) {
-            var this_ent = entities[x];
+            var this_ent = entities[x]
             var this_begin = this_ent.begin;
             var this_end = this_ent.end;
             if (this_begin > new_begin) {
@@ -345,28 +226,22 @@ function HomeViewModel(app, dataModel) {
                     for (var x = 0; x < annotations.length; x++) {
                         var text = quill.getText(annotations[x].begin, annotations[x].end - annotations[x].begin);
                         var new_entity = {};
-                        if (annotations[x].type === "Organization") {
+                        if (annotations[x].type === "ORGANIZATION") {
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, "color", "red");
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            var new_organization = { Id: orgId++, Text: text, begin: annotations[x].begin, end: annotations[x].end};
-                            self.insertOrganization(new_organization);
-                            new_entity = { begin: annotations[x].begin, end: annotations[x].end, type: "Organization" };
+                            new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: "ORGANIZATION" };
                             self.insertEntity(new_entity);
                         }
-                        else if (annotations[x].type === "Location") {
+                        else if (annotations[x].type === "LOCATION") {
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'color', "blue");
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            var new_location = { Id: locId++, Text: text, begin: annotations[x].begin, end: annotations[x].end };
-                            self.insertLocation(new_location);
-                            new_entity = { begin: annotations[x].begin, end: annotations[x].end, type: "Location" };
+                            new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: "LOCATION" };
                             self.insertEntity(new_entity);
                         }
-                        else if (annotations[x].type === "People") {
+                        else if (annotations[x].type === "PERSON") {
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'color', "green");
                             quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            var new_person = { Id: perId++, Text: text, begin: annotations[x].begin, end: annotations[x].end };
-                            self.insertPerson(new_person);
-                            new_entity = { begin: annotations[x].begin, end: annotations[x].end, type: "People" };
+                            new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: "PERSON" };
                             self.insertEntity(new_entity);
                         }
 
@@ -462,25 +337,19 @@ function HomeViewModel(app, dataModel) {
                     if (type === "ORGANIZATION") {
                         quill.formatText(begin, end - begin, "color", "red");
                         quill.formatText(begin, end - begin, 'bold', true);
-                        var new_organization = { Id: self.orgNo++, Text: text, begin: begin, end: end };
-                        self.insertOrganization(new_organization);
-                        new_entity = { begin: begin, end: end, type: "Organization" };
+                        new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: "ORGANIZATION" };
                         self.insertEntity(new_entity);
                     }
                     else if (type === "LOCATION") {
                         quill.formatText(begin, end - begin, 'color', "blue");
                         quill.formatText(begin, end - begin, 'bold', true);
-                        var new_location = { Id: self.locNo++, Text: text, begin: begin, end: end };
-                        self.insertLocation(new_location);
-                        new_entity = { begin: begin, end: end, type: "Location" };
+                        new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: "LOCATION" };
                         self.insertEntity(new_entity);
                     }
                     else if (type === "PERSON") {
                         quill.formatText(begin, end - begin, 'color', "green");
                         quill.formatText(begin, end - begin, 'bold', true);
-                        var new_person = { Id: self.perNo++, Text: text, begin: begin, end: end };
-                        self.insertPerson(new_person);
-                        new_entity = { begin: begin, end: end, type: "People" };
+                        new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: "PERSON" };
                         self.insertEntity(new_entity);
                     }
 
@@ -805,28 +674,22 @@ function HomeViewModel(app, dataModel) {
             } else {
                 var text = quill.getText(range.index, range.length);
                 var new_entity = {};
-                if (self.selectedOption() === "Organization") {
+                if (self.selectedOption() === "ORGANIZATION") {
                     quill.format("color", "red");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    var new_organization = { Id: self.orgNo++, Text: text, begin: range.index, end: range.index + range.length };
-                    self.insertOrganization(new_organization);
-                    new_entity = { begin: range.index, end: range.index + range.length, type: "Organization" };
+                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: "ORGANIZATION" };
                     self.insertEntity(new_entity);
                 }
-                else if (self.selectedOption() === "Location") {
+                else if (self.selectedOption() === "LOCATION") {
                     quill.format("color", "blue");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    var new_location = { Id: self.locNo++, Text: text, begin: range.index, end: range.index + range.length };
-                    self.insertLocation(new_location);
-                    new_entity = { begin: range.index, end: range.index + range.length, type: "Location" };
+                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: "LOCATION" };
                     self.insertEntity(new_entity);
                 }
-                else if (self.selectedOption() === "Person") {
+                else if (self.selectedOption() === "PERSON") {
                     quill.format("color", "green");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    var new_person = { Id: self.perNo++, Text: text, begin: range.index, end: range.index + range.length };
-                    self.insertPerson(new_person);
-                    new_entity = { begin: range.index, end: range.index + range.length, type: "Person" };
+                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: "PERSON" };
                     self.insertEntity(new_entity);
                 }
             }
@@ -881,12 +744,7 @@ function HomeViewModel(app, dataModel) {
     };
 
     self.clear = function () {
-        self.Organizations([]);
-        self.Locations([]);
-        self.People([]);
-        orgNo = 0;
-        locNo = 0;
-        perNo = 0;
+        self.entityNo = 0;
         self.AllEntities([]);
         quill.removeFormat(0, quill.getLength());
     };
