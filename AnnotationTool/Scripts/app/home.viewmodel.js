@@ -158,14 +158,14 @@ function HomeViewModel(app, dataModel) {
     self.folderFile = ko.observableArray();
 
     self.findEntity = function (ent) {
-        var begin = org.begin;
-        var end = org.end;
+        var begin = ent.begin;
+        var end = ent.end;
         quill.formatText(begin, end - begin, "background-color", "yellow");
     };
 
     self.leaveEntity = function (ent) {
-        var begin = org.begin;
-        var end = org.end;
+        var begin = ent.begin;
+        var end = ent.end;
         quill.formatText(begin, end - begin, "background-color", "white");
     };
 
@@ -226,24 +226,12 @@ function HomeViewModel(app, dataModel) {
                     for (var x = 0; x < annotations.length; x++) {
                         var text = quill.getText(annotations[x].begin, annotations[x].end - annotations[x].begin);
                         var new_entity = {};
-                        if (annotations[x].type === "ORGANIZATION") {
-                            quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, "color", "red");
-                            quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: "ORGANIZATION" };
-                            self.insertEntity(new_entity);
-                        }
-                        else if (annotations[x].type === "LOCATION") {
-                            quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'color', "blue");
-                            quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: "LOCATION" };
-                            self.insertEntity(new_entity);
-                        }
-                        else if (annotations[x].type === "PERSON") {
-                            quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'color', "green");
-                            quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
-                            new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: "PERSON" };
-                            self.insertEntity(new_entity);
-                        }
+
+                        // maybe double check the type so that it is legitimate type?
+                        quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, "color", "orange");
+                        quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
+                        new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: annotations[x].type };
+                        self.insertEntity(new_entity);
 
                     }
                     $('#myModal').modal('hide');
@@ -334,24 +322,12 @@ function HomeViewModel(app, dataModel) {
                     type = entry['type'].toUpperCase();
                     var text = quill.getText(begin, end - begin);
                     var new_entity;
-                    if (type === "ORGANIZATION") {
-                        quill.formatText(begin, end - begin, "color", "red");
-                        quill.formatText(begin, end - begin, 'bold', true);
-                        new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: "ORGANIZATION" };
-                        self.insertEntity(new_entity);
-                    }
-                    else if (type === "LOCATION") {
-                        quill.formatText(begin, end - begin, 'color', "blue");
-                        quill.formatText(begin, end - begin, 'bold', true);
-                        new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: "LOCATION" };
-                        self.insertEntity(new_entity);
-                    }
-                    else if (type === "PERSON") {
-                        quill.formatText(begin, end - begin, 'color', "green");
-                        quill.formatText(begin, end - begin, 'bold', true);
-                        new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: "PERSON" };
-                        self.insertEntity(new_entity);
-                    }
+
+                    // double for legitimate type?
+                    quill.formatText(begin, end - begin, "color", "orange");
+                    quill.formatText(begin, end - begin, 'bold', true);
+                    new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: type };
+                    self.insertEntity(new_entity);
 
                 }
             },
@@ -674,22 +650,12 @@ function HomeViewModel(app, dataModel) {
             } else {
                 var text = quill.getText(range.index, range.length);
                 var new_entity = {};
-                if (self.selectedOption() === "ORGANIZATION") {
-                    quill.format("color", "red");
+                var selOption = self.selectedOption();
+                if (selOption.length > 0) {
+                    // need to distinguish this
+                    quill.format("color", "orange");
                     quill.formatText(range.index, range.length, 'bold', true);
-                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: "ORGANIZATION" };
-                    self.insertEntity(new_entity);
-                }
-                else if (self.selectedOption() === "LOCATION") {
-                    quill.format("color", "blue");
-                    quill.formatText(range.index, range.length, 'bold', true);
-                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: "LOCATION" };
-                    self.insertEntity(new_entity);
-                }
-                else if (self.selectedOption() === "PERSON") {
-                    quill.format("color", "green");
-                    quill.formatText(range.index, range.length, 'bold', true);
-                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: "PERSON" };
+                    new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: selOption };
                     self.insertEntity(new_entity);
                 }
             }
