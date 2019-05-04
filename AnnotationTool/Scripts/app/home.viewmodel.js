@@ -3,6 +3,8 @@
 var oldSenSentiment = [];
 var splitSentences = [];
 
+var colorDict = {};
+
 var stateMode = 1;
 
 $(document).ready(function () {
@@ -15,8 +17,9 @@ $(document).ready(function () {
         success: function (rsp) {
             result = JSON.parse(rsp);
             for (var x = 0; x < result.length; x++) {
-                var Id = result[x].Id;
-                var Type = result[x].Type 
+                var Type = result[x].Type;
+                var Color = result[x].Color;
+                colorDict[Type] = Color;
                 // and here we draw on the screen
                 $('#entity_block').append('<div style="margin-bottom:10px;">    <h4 class="" style="display:inline-block">' + Type + 's:</h4>    <span data-bind="foreach: AllEntities">        <span data-bind="if: type == \'' + Type + '\'">        <span class="label label-danger" style="font-size:12px; margin-right:5px; margin-bottom:5px;" data-bind="event: { mouseenter: $parent.findEntity, mouseleave: $parent.leaveEntity } ">            <span data-bind="text: Text"></span>            <span class="glyphicon glyphicon-remove" data-bind="click: $parent.removeEntity"></span>        </span>        </span>    </span></div>');
                 // and here we populate the dropdown
@@ -228,7 +231,7 @@ function HomeViewModel(app, dataModel) {
                         var new_entity = {};
 
                         // maybe double check the type so that it is legitimate type?
-                        quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, "color", "orange");
+                        quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, "color", annotations[x].color);
                         quill.formatText(annotations[x].begin, annotations[x].end - annotations[x].begin, 'bold', true);
                         new_entity = { Id: self.entityNo++, Text: text, begin: annotations[x].begin, end: annotations[x].end, type: annotations[x].type };
                         self.insertEntity(new_entity);
@@ -318,13 +321,14 @@ function HomeViewModel(app, dataModel) {
                     entry = entries[x];
                     begin = entry['begin'];
                     end = entry['end'];
+                    color = entry['color'];
                     // None of our types are international, so toUpperCase is sufficient for this situation                    
                     type = entry['type'].toUpperCase();
                     var text = quill.getText(begin, end - begin);
                     var new_entity;
 
                     // double for legitimate type?
-                    quill.formatText(begin, end - begin, "color", "orange");
+                    quill.formatText(begin, end - begin, "color", color);
                     quill.formatText(begin, end - begin, 'bold', true);
                     new_entity = { Id: self.entityNo++, Text: text, begin: begin, end: end, type: type };
                     self.insertEntity(new_entity);
@@ -653,7 +657,7 @@ function HomeViewModel(app, dataModel) {
                 var selOption = self.selectedOption();
                 if (selOption.length > 0) {
                     // need to distinguish this
-                    quill.format("color", "orange");
+                    quill.format("color", colorDict[selOption]);
                     quill.formatText(range.index, range.length, 'bold', true);
                     new_entity = { Id: self.entityNo++, Text: text, begin: range.index, end: range.index + range.length, type: selOption };
                     self.insertEntity(new_entity);

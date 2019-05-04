@@ -22,6 +22,8 @@ namespace AnnotationTool.API
         const string Release = "release";
         const string Debug = "debug";
 
+        IDictionary<string, string> colorDict = new Dictionary<string, string>();
+
         [HttpPost]
         [Route("upload")]
         public bool UploadFile(Models.Upload upload)
@@ -140,6 +142,7 @@ namespace AnnotationTool.API
                         ann.begin = em.begin;
                         ann.end = em.end;
                         ann.type = em.type;
+                        ann.color = colorDict[ann.type];
                         annotations.Add(ann);
                     }
                     annotationParts.Add(annotations);
@@ -160,6 +163,7 @@ namespace AnnotationTool.API
                         ann.begin = begin - xmlJunkOffset;
                         ann.end = end - xmlJunkOffset;
                         SetAnnotationType(ann, entityTypes, text);
+                        ann.color = colorDict[ann.type];
                     }
                     annotationParts.Add(annotations);
                     return JsonConvert.SerializeObject(annotationParts);
@@ -540,6 +544,8 @@ namespace AnnotationTool.API
                 EntityType et = new EntityType();
                 et.Id = Convert.ToInt32(parts[0]);
                 et.Type = parts[1];
+                et.Color = parts[2];
+                colorDict[parts[1]] = parts[2];
                 entityTypes.Add(et);
             }
             return entityTypes;
