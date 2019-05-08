@@ -26,201 +26,201 @@
 
 <h2>Known Entity Types:</h2>
 
-<div id="entity_block">
+<div id="entity_block" style="overflow-y: auto; height:200px; background-color:#e9ecef">
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+            </div>
         </div>
     </div>
-</div>
 
-<select data-bind="options: entityTypes, optionsText: $data, value: selectedOption, optionsCaption: 'Choose...'"></select>
+    <select data-bind="options: entityTypes, optionsText: $data, value: selectedOption, optionsCaption: 'Choose...'"></select>
 
-<div>
-    &nbsp;
-</div>
+    <div>
+        &nbsp;
+    </div>
 
-<div id="editor" style="height: 250px">
+    <div id="editor" style="height: 250px">
 
-</div>
+    </div>
 
-<div id="hidden_sentences" class="containter" style="display: none; height: 200px">
-</div>
+    <div id="hidden_sentences" class="containter" style="display: none; height: 200px">
+    </div>
 
-<div>
-    <h3 class="" style="display:inline-block">Language:</h3>
-    <span id="doc_lang">
-        UNKNOWN
-    </span>
-</div>
+    <div>
+        <h3 class="" style="display:inline-block">Language:</h3>
+        <span id="doc_lang">
+            UNKNOWN
+        </span>
+    </div>
 
-<div>
-    <h3 class="" style="display:inline-block">Topics:</h3>
-    <span id="doc_topic_1">
-        ?
-    </span>
-    <span id="doc_topic_2">
-    </span>
-    <span id="doc_topic_3">
-    </span>
-    <span id="doc_topic_4">
-    </span>
-    <span id="doc_topic_5">
-    </span>
-</div>
+    <div>
+        <h3 class="" style="display:inline-block">Topics:</h3>
+        <span id="doc_topic_1">
+            ?
+        </span>
+        <span id="doc_topic_2">
+        </span>
+        <span id="doc_topic_3">
+        </span>
+        <span id="doc_topic_4">
+        </span>
+        <span id="doc_topic_5">
+        </span>
+    </div>
 
-<div>
-    <h3 class="" style="display:inline-block">Document Sentiment:</h3>
-</div>
-<select data-bind="options: sentimentTypes, optionsText: $data, value: selectedSentimentOption, optionsCaption: 'Choose...'"></select>
+    <div>
+        <h3 class="" style="display:inline-block">Document Sentiment:</h3>
+    </div>
+    <select data-bind="options: sentimentTypes, optionsText: $data, value: selectedSentimentOption, optionsCaption: 'Choose...'"></select>
 
-<div>
-    <h3 class="" style="display:inline-block">Element Sentiment:</h3>
-    <table id="entity_sentiment_scores" style="background-color:#eeeeee">
-        <thead>
-            <tr>
-                <th style="min-width:100px">Entity</th>
-                <th style="min-width:100px">Score</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div>
+    <div>
+        <h3 class="" style="display:inline-block">Element Sentiment:</h3>
+        <table id="entity_sentiment_scores" style="background-color:#eeeeee">
+            <thead>
+                <tr>
+                    <th style="min-width:100px">Entity</th>
+                    <th style="min-width:100px">Score</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 
-<div>
-    <h3 class="" style="display:inline-block">Annotation Format:</h3>
-</div>
-<select id="formatSelect" data-bind=" options: annotationTypes, optionsText: $data, value: selectedFormatOption, optionsCaption: 'Choose...'"></select>
+    <div>
+        <h3 class="" style="display:inline-block">Annotation Format:</h3>
+    </div>
+    <select id="formatSelect" data-bind=" options: annotationTypes, optionsText: $data, value: selectedFormatOption, optionsCaption: 'Choose...'"></select>
 
-<div style="height: 25px">
-</div>
+    <div style="height: 25px">
+    </div>
 
-<div id="top_button_row">
-    <button type="button" id="button3" class="btn btn-primary" data-bind="click: $data.auto_mentions" style="margin-top: 10px;">Auto Annotate Mentions</button>
-    <button type="button" id="button4" class="btn btn-primary" data-bind="click: $data.auto_doc_sentiment" style="margin-top: 10px;">Auto Annotate Document Sentiment</button>
-    <button type="button" id="button5" class="btn btn-primary" data-bind="click: $data.auto_entity_sentiment" style="margin-top: 10px;">Auto Annotate Entity Sentiment</button>
-    <button type="button" id="button6" class="btn btn-primary" data-bind="click: $data.sentence_splitter" style="margin-top: 10px;">Split Sentences</button>
-    <button type="button" id="button7" class="btn btn-primary" data-bind="click: $data.auto_sent_sentiment" style="margin-top: 10px;">Auto Annotate Sentence Sentiment</button>
-</div>
-<div id="bottom_button_row">
-    <button type="button" id="button8" class="btn btn-primary" data-bind="click: $data.language" style="margin-top: 10px;">Identify Language</button>
-    <button type="button" id="button13" class="btn btn-primary" data-bind="click: $data.topics" style="margin-top: 10px;">Show Topics</button>
-    <button type="button" id="button9" class="btn btn-primary" data-bind="click: $data.parse_html" style="margin-top: 10px;">Parse HTML</button>
-    <button type="button" id="button10" class="btn btn-primary" data-bind="click: $data.spell_correct" style="margin-top: 10px;">Correct Spelling</button>
-    <button type="button" id="button11" class="btn btn-primary" data-bind="click: $data.save" style="margin-top: 10px;">Save</button>
-    <button type="button" id="button12" class="btn btn-primary" data-bind="click: $data.clear" style="margin-top: 10px;">Clear</button>
-</div>
+    <div id="top_button_row">
+        <button type="button" id="button3" class="btn btn-primary" data-bind="click: $data.auto_mentions" style="margin-top: 10px;">Auto Annotate Mentions</button>
+        <button type="button" id="button4" class="btn btn-primary" data-bind="click: $data.auto_doc_sentiment" style="margin-top: 10px;">Auto Annotate Document Sentiment</button>
+        <button type="button" id="button5" class="btn btn-primary" data-bind="click: $data.auto_entity_sentiment" style="margin-top: 10px;">Auto Annotate Entity Sentiment</button>
+        <button type="button" id="button6" class="btn btn-primary" data-bind="click: $data.sentence_splitter" style="margin-top: 10px;">Split Sentences</button>
+        <button type="button" id="button7" class="btn btn-primary" data-bind="click: $data.auto_sent_sentiment" style="margin-top: 10px;">Auto Annotate Sentence Sentiment</button>
+    </div>
+    <div id="bottom_button_row">
+        <button type="button" id="button8" class="btn btn-primary" data-bind="click: $data.language" style="margin-top: 10px;">Identify Language</button>
+        <button type="button" id="button13" class="btn btn-primary" data-bind="click: $data.topics" style="margin-top: 10px;">Show Topics</button>
+        <button type="button" id="button9" class="btn btn-primary" data-bind="click: $data.parse_html" style="margin-top: 10px;">Parse HTML</button>
+        <button type="button" id="button10" class="btn btn-primary" data-bind="click: $data.spell_correct" style="margin-top: 10px;">Correct Spelling</button>
+        <button type="button" id="button11" class="btn btn-primary" data-bind="click: $data.save" style="margin-top: 10px;">Save</button>
+        <button type="button" id="button12" class="btn btn-primary" data-bind="click: $data.clear" style="margin-top: 10px;">Clear</button>
+    </div>
 
-<div style="height: 25px">
-</div>
+    <div style="height: 25px">
+    </div>
 
-<div id="hidden_doc_sentiment" style="display: none;">
-    <input type="radio" id="annotatorChoice1"
-           name="annotator_group" value="spacy">
-    <label for="annotatorChoice1">Spacy</label>
+    <div id="hidden_doc_sentiment" style="display: none;">
+        <input type="radio" id="annotatorChoice1"
+               name="annotator_group" value="spacy">
+        <label for="annotatorChoice1">Spacy</label>
 
-    <input type="radio" id="annotatorChoice2"
-           name="annotator_group" value="vader" checked>
-    <label for="annotatorChoice2">Vader</label>
+        <input type="radio" id="annotatorChoice2"
+               name="annotator_group" value="vader" checked>
+        <label for="annotatorChoice2">Vader</label>
 
-    <input type="radio" id="annotatorChoice3"
-           name="annotator_group" value="tweepy">
-    <label for="annotatorChoice3">Tweepy</label>
+        <input type="radio" id="annotatorChoice3"
+               name="annotator_group" value="tweepy">
+        <label for="annotatorChoice3">Tweepy</label>
 
-    <input type="radio" id="annotatorChoice4"
-           name="annotator_group" value="finance">
-    <label for="annotatorChoice4">Finance</label>
+        <input type="radio" id="annotatorChoice4"
+               name="annotator_group" value="finance">
+        <label for="annotatorChoice4">Finance</label>
 
-    <input type="radio" id="annotatorChoice5"
-           name="annotator_group" value="stanford">
-    <label for="annotatorChoice5">Stanford</label>
+        <input type="radio" id="annotatorChoice5"
+               name="annotator_group" value="stanford">
+        <label for="annotatorChoice5">Stanford</label>
 
-    <input type="radio" id="annotatorChoice6"
-           name="annotator_group" value="google">
-    <label for="annotatorChoice6">Google</label>
+        <input type="radio" id="annotatorChoice6"
+               name="annotator_group" value="google">
+        <label for="annotatorChoice6">Google</label>
 
-    <input type="radio" id="annotatorChoice7"
-           name="annotator_group" value="aylien">
-    <label for="annotatorChoice7">Aylien</label>
+        <input type="radio" id="annotatorChoice7"
+               name="annotator_group" value="aylien">
+        <label for="annotatorChoice7">Aylien</label>
 
-    <input type="radio" id="annotatorChoice8"
-           name="annotator_group" value="charlstm">
-    <label for="annotatorChoice8">Charlstm</label>
+        <input type="radio" id="annotatorChoice8"
+               name="annotator_group" value="charlstm">
+        <label for="annotatorChoice8">Charlstm</label>
 
-    <input type="radio" id="annotatorChoice9"
-           name="annotator_group" value="composite_a">
-    <label for="annotatorChoice9">Composite - All</label>
+        <input type="radio" id="annotatorChoice9"
+               name="annotator_group" value="composite_a">
+        <label for="annotatorChoice9">Composite - All</label>
 
-    <input type="radio" id="annotatorChoice10"
-           name="annotator_group" value="composite_b">
-    <label for="annotatorChoice10">Composite - Rule Based</label>
+        <input type="radio" id="annotatorChoice10"
+               name="annotator_group" value="composite_b">
+        <label for="annotatorChoice10">Composite - Rule Based</label>
 
-    <input type="radio" id="annotatorChoice11"
-           name="annotator_group" value="composite_c">
-    <label for="annotatorChoice11">Composite - All But Charlstm</label>
+        <input type="radio" id="annotatorChoice11"
+               name="annotator_group" value="composite_c">
+        <label for="annotatorChoice11">Composite - All But Charlstm</label>
 
-    <button type="button" class="btn btn-primary" data-bind="click: $data.apply_auto_doc_sentiment" style="margin-top: 10px;">Go</button>
-</div>
+        <button type="button" class="btn btn-primary" data-bind="click: $data.apply_auto_doc_sentiment" style="margin-top: 10px;">Go</button>
+    </div>
 
-<div style="height: 10px">
-</div>
+    <div style="height: 10px">
+    </div>
 
-<div id="hidden_sent_sentiment" style="display: none;">
-    <input type="radio" id="annotatorChoice1"
-           name="sentence_annotator_group" value="stanford">
-    <label for="annotatorChoice1">Stanford</label>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.apply_auto_sent_sentiment" style="margin-top: 10px;">Go</button>
-</div>
+    <div id="hidden_sent_sentiment" style="display: none;">
+        <input type="radio" id="annotatorChoice1"
+               name="sentence_annotator_group" value="stanford">
+        <label for="annotatorChoice1">Stanford</label>
+        <button type="button" class="btn btn-primary" data-bind="click: $data.apply_auto_sent_sentiment" style="margin-top: 10px;">Go</button>
+    </div>
 
-<div style="height: 10px">
-</div>
+    <div style="height: 10px">
+    </div>
 
-<div id="hidden_entity_sentiment" style="display: none;">
-    <input type="radio" id="annotatorChoice1"
-           name="entity_annotator_group" value="charlstm">
-    <label for="annotatorChoice1">Charlstm</label>
-    <button type="button" class="btn btn-primary" data-bind="click: $data.apply_auto_entity_sentiment" style="margin-top: 10px;">Go</button>
-</div>
+    <div id="hidden_entity_sentiment" style="display: none;">
+        <input type="radio" id="annotatorChoice1"
+               name="entity_annotator_group" value="charlstm">
+        <label for="annotatorChoice1">Charlstm</label>
+        <button type="button" class="btn btn-primary" data-bind="click: $data.apply_auto_entity_sentiment" style="margin-top: 10px;">Go</button>
+    </div>
 
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Select File</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row" data-bind="foreach: existingFilePaths">
-                    <div class="col-md-3">
-                        <a data-bind="click: $parent.addFilePath">
-                            <span class="glyphicon glyphicon-hdd"></span>
-                            <p data-bind="text: fileName"></p>
-                        </a>
-                    </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Select File</h4>
                 </div>
+                <div class="modal-body">
+                    <div class="row" data-bind="foreach: existingFilePaths">
+                        <div class="col-md-3">
+                            <a data-bind="click: $parent.addFilePath">
+                                <span class="glyphicon glyphicon-hdd"></span>
+                                <p data-bind="text: fileName"></p>
+                            </a>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+
         </div>
-
     </div>
-</div>
-<!-- Initialize Quill editor -->
-<script>
+    <!-- Initialize Quill editor -->
+    <script>
 
 
-    var quill = new Quill('#editor', {
-        theme: "snow"
-    });
+        var quill = new Quill('#editor', {
+            theme: "snow"
+        });
 
 
-</script>
-<!-- /ko -->
+    </script>
+    <!-- /ko -->
