@@ -453,7 +453,7 @@ namespace AnnotationTool.API
                     {
                         EntityMention em = new EntityMention();
                         em.begin = clientAnnotation.begin;
-                        em.end = clientAnnotation.end;
+                        em.end = clientAnnotation.end - 1;
                         em.type = clientAnnotation.type;
                         fulltext += (
                             "{" +
